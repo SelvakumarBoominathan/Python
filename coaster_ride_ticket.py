@@ -5,6 +5,9 @@ def ticket_calculator():
     if height >= 120:
       print("Great!. you are eligible to ride the roller coaster.")
       age = int(input("What is your age? "))
+
+      is_photo_needed = input("Do you want a photo taken? Y or N: ").upper()
+
       if age>=12 and age <=18:
         print("Your ticket price is $7.")
       elif age < 12 and age >=4:
