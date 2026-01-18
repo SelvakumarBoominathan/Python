@@ -76,7 +76,7 @@ thislist.clear()
 print(f"Clear List : {thislist}")
 
 
-#delete list items using del keyword
+# delete list items using del keyword
 mylist = ["apple", "banana", "cherry", "orange", "kiwi", "melon", "mango"]
 del mylist[0]
 print(f"Delete List Items using del : {mylist}")
@@ -84,3 +84,34 @@ print(f"Delete List Items using del : {mylist}")
 # delete entire list
 del mylist
 # print(f"Delete entire List using del : {mylist}")  # this will raise an error as the list is deleted
+
+
+# Loop through a list
+mylist = ["apple", "banana", "cherry", "orange", "kiwi", "melon", "mango"]
+for x in mylist:
+    print(f"Loop through List : {x}")
+
+# Loop through list using index
+for i in range(len(mylist)):
+    print(f"Loop through List using index : {mylist[i]}")
+
+
+# Loop through list using while
+fruits = ["apple", "banana", "cherry", "orange", "kiwi", "melon", "mango"]
+i = 0
+while i < len(fruits):
+    print(fruits[i])
+    i += 1
+
+
+# List Comprehension
+# newlist will contain all items from mylist that have the letter "a" in them
+newlist = [x for x in mylist if "a" in x]
+print(f"List Comprehension : {newlist}")
+
+# Sort List
+# sort() method sorts the list ascending by default. It changes the original array and returns nothing
+mylist.sort()   # sort list in ascending order
+print(f"Sort List : {mylist}")
+mylist.sort(reverse=True)  # sort list in descending order
+print(f"Sort List in Descending order : {mylist}")
