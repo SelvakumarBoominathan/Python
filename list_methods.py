@@ -59,5 +59,28 @@ print(f"Extend List : {mylist}")
 # Remove List Items
 # removes specified item. if the item is not found, it will raise a ValueError
 mylist.remove("mango")
+# mylist.remove(1)
 print(f"Remove List Items : {mylist}")
 # removes item at specified index (or first item appearance if index not specified)
+
+
+# removes the last item by default else removes item at specified index
+mylist.pop()
+mylist.pop(1)  # removes item at index 1
+print(f"Pop List Items : {mylist}")
+
+
+# clear the list
+thislist = ["apple", "banana", "cherry"]
+thislist.clear()
+print(f"Clear List : {thislist}")
+
+
+#delete list items using del keyword
+mylist = ["apple", "banana", "cherry", "orange", "kiwi", "melon", "mango"]
+del mylist[0]
+print(f"Delete List Items using del : {mylist}")
+
+# delete entire list
+del mylist
+# print(f"Delete entire List using del : {mylist}")  # this will raise an error as the list is deleted
