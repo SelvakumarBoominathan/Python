@@ -109,6 +109,8 @@ while i < len(fruits):
 newlist = [x for x in mylist if "a" in x]
 print(f"List Comprehension : {newlist}")
 
+
+
 # Sort List
 # sort() method sorts the list ascending by default. It changes the original array and returns nothing
 mylist.sort()   # sort list in ascending order
