@@ -15,3 +15,15 @@ def is_palindrome(string):
 
 
 is_palindrome("madan")
+
+
+
+
+''' Simple solution is below (Not for the interviews)
+
+  def isPalindrome(s):
+      return s == s[::-1]
+  
+  isPalindrome("madan")
+
+'''
