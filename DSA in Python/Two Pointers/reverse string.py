@@ -7,9 +7,7 @@ def reverse_string(string):
     R = len(str)-1
 
     while L < R:
-        current = str[L]
-        str[L] = str[R]
-        str[R] = current
+        str[L] , str[R] = str[R], str[L]
         L += 1
         R -= 1
 

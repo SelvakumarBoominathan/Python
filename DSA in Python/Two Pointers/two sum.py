@@ -1,5 +1,5 @@
 #Fine a pair in a sorted array such that their sum is equal to a given number
-# #using Two Pointers Technique
+#using Two Pointers Technique
 
 
 arr = [2,3,5,7,9,11,12,13]

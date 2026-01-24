@@ -1,0 +1,16 @@
+
+THREE RULES to remember befor applying two pointers: 
+
+Rule 1: Sorted data
+
+Two pointers usually require sorted input.
+
+Rule 2: One pointer moves at a time
+
+Movement is logical, not random.
+
+Rule 3: Stop condition
+
+Usually:
+
+while left < right
