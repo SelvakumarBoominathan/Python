@@ -14,3 +14,15 @@ Rule 3: Stop condition
 Usually:
 
 while left < right
+
+
+
+Common begginner mistakes to avoid: 
+
+Forgetting array must be sorted
+
+Moving both pointers blindly
+
+Using <= instead of <
+
+Trying two pointers where hashing is better
