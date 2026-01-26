@@ -19,11 +19,13 @@ print(pow(4, 3))  # returns the power of a number
 
 print(math.sqrt(54))  # returns the square root of a number
 
-print(math.floor(5.67))  # returns the largest integer less than or equal to a number
+# returns the largest integer less than or equal to a number
+print(math.floor(5.67))
 
-print(math.ceil(5.67))  # returns the smallest integer greater than or equal to a number
+# returns the smallest integer greater than or equal to a number
+print(math.ceil(5.67))
 
 
-#python constrants from math module
+# python constrants from math module. when calling math.pi, we non need to use () as it is a constant not a method.
 
-print(math.pi())  # returns the value of pi constant
+print(math.pi)  # returns the value of pi constant
