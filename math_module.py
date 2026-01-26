@@ -22,3 +22,8 @@ print(math.sqrt(54))  # returns the square root of a number
 print(math.floor(5.67))  # returns the largest integer less than or equal to a number
 
 print(math.ceil(5.67))  # returns the smallest integer greater than or equal to a number
+
+
+#python constrants from math module
+
+print(math.pi())  # returns the value of pi constant
