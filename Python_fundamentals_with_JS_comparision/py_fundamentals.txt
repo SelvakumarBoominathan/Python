@@ -44,6 +44,42 @@ UNPACKING:
 - Assign multiple values at once
 - Example: x, y, z = ["apple", "banana", "cherry"]
 
+OPERATORS:
+- Arithmetic: +, -, *, /, //, %, **
+- Comparison: ==, !=, <, >, <=, >=
+- Logical: and, or, not
+- Assignment: =, +=, -=, *=, /=, //=, %=, **=
+- Bitwise: &, |, ^, ~, <<, >>
+- Identity: is, is not
+- Membership: in, not in
+
+CONTROL FLOW:
+- Conditional: if, elif, else
+- Loops: for, while
+- Loop control: break, continue, pass
+- Exception handling: try, except, else, finally
+
+FUNCTIONS:
+- Definition: def function_name(parameters):
+- Return values: return statement
+- Default parameters: def func(x=5):
+- *args: variable positional arguments
+- **kwargs: variable keyword arguments
+- Lambda: lambda x: x + 2 (anonymous functions)
+
+COLLECTIONS:
+- List: mutable, ordered, allows duplicates
+- Tuple: immutable, ordered, allows duplicates
+- Set: unordered, unique values, mutable
+- Dictionary: key-value pairs, unordered (Python 3.7+: ordered)
+
+BUILT-IN FUNCTIONS:
+- print(), len(), type(), isinstance()
+- min(), max(), sum(), abs()
+- sorted(), reversed(), enumerate()
+- zip(), map(), filter()
+- all(), any(), range()
+
 
 
 DATA TYPES - PYTHON vs JAVASCRIPT:
