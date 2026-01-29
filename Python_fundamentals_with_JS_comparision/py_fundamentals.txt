@@ -60,13 +60,16 @@ use "global" keyword to convert a local variable as global one.
 
 
 
-Data types:
-Type	Python (keyword)	JS (keyword)
-Text	str	String
-Numeric	int, float, complex	Number
-Sequence	list, tuple, range	Array
-Mapping	dict	Object
-set	set, frozenset	
-Boolean	True, False	true, false
-Binary	bytes, bytearray, memoryview	
-None type	None	undefined, null
++----------+------------------------+---------------------+
+| Data Type| Python (keyword)       | JS (keyword)        |
++----------+------------------------+---------------------+
+| Text     | str                    | String              |
+| Numeric  | int, float, complex    | Number              |
+| Sequence | list, tuple, range     | Array               |
+| Mapping  | dict                   | Object              |
+| Set      | set, frozenset         |                     |
+| Boolean  | True, False            | true, false         |
+| Binary   | bytes, bytearray,      |                     |
+|          | memoryview             |                     |
+| None type| None                   | undefined, null     |
++----------+------------------------+---------------------+
