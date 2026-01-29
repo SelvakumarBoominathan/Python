@@ -1,62 +1,48 @@
 Created : Guido van Rossum
 Released: 1991
 
-Uses Indentation to define scope.
- check version = in cmd -> python --version
+BASICS:
+- Uses indentation (4 spaces) to define code scope
+- Check version: python --version (in command prompt)
+- Interactive mode: Type "py" in cmd, then exit() to quit
 
+COMMENTS:
+- Single line: # comment
+- Multi-line: ''' comment text '''
 
-In cmd-> py + enter (creates py env, we can write python commands.)
+DATA INPUT:
+- input() function always returns a string
+- Python is dynamically typed (no type declaration needed)
 
-In cmd -> exit()  (this will end our python mode in cmd prompt)
+TYPE CHECKING & CASTING:
+- Check type: type(variable) => returns data type
+- Cast to string: str(value)
+- Cast to integer: int(value)
+- Cast to float: float(value)
+- Cast to list: list(tuple_or_sequence)
+- Cast to tuple: tuple(sequence)
+- Cast to dict: dict(key=value, ...)
+- Cast to set: set(sequence)
+- Cast to boolean: bool(value)
 
-SYNTAX:
-Use 4 space to create scope. 
+VARIABLE NAMING RULES:
+- Start with letter or underscore (_)
+- No numbers at start
+- Case-sensitive
+- Avoid Python keywords
+- Naming conventions:
+  * camelCase: myVariableName
+  * PascalCase: MyVariableName
+  * snake_case: my_variable_name
 
-Single line comment : use "#"
-Multi line comment: use '''  tripple single quote.
+VARIABLE SCOPE:
+- Global: declared outside functions, accessible everywhere
+- Local: declared inside functions, accessible only within function
+- Use "global" keyword to make local variable global
 
-Input is always a string. 
-
-Python is dynamically typed language.
-
-Even variable declaration keyword is not required.
-
-
-
-Checking type : FUNCTION. type(). EG: type("hello")  => <class 'str'>
-
-
-Casting: FUNCTION : 
-str(3) => "3"
-int(3) => 3
-float(3) => 3.0
-complex(1j)
-list(("apple", "banana", "cherry"))
-x = tuple(("apple", "banana", "cherry"))
-range(6) => (0,6) => [0,1,2,3,4,5]
-dict(name="John", age=36)
-set(("apple", "banana", "cherry"))
-frozenset(("apple", "banana", "cherry"))
-bool(5)
-
-Declaring variable: 
-Start with letter or underscore. No numbers, case sensitive, don’t use inbuild keywords as variable name.
-1. camel case => myVariableName = "John"
-2.Pascalcase => MyVariableName = "John"
-3.snakecase => my_variable_name = "John"
-
-Unpacking - similar to array DE structuring in JS.
-fruits = ["apple", "banana", "cherry"]
-x, y, z = fruits
-
-
-Global variables: 
-Variables declared outside of the function. Can be used anywhere in the program. 
-
-Local variable: 
-Variables declared inside the function. Can be used anywhere in the program. 
-
-use "global" keyword to convert a local variable as global one.
+UNPACKING:
+- Assign multiple values at once
+- Example: x, y, z = ["apple", "banana", "cherry"]
 
 
 
