@@ -73,28 +73,31 @@ KEY DIFFERENCES:
 - JavaScript: Limited immutable alternatives
 
 
-StringS:
-Strings are immutable. We cannot modify once declared. We can access using indexing and loop through it.
+STRINGS:
+- Immutable: Cannot modify after creation
+- Access: Use indexing and loops to iterate through characters
 
-
+EXAMPLE:
  for x in "banana":
-      print(x)
+  print(x)
 
+LENGTH FUNCTION:
+- Keyword: len()
+- Returns the number of characters in a string
+- Example: len("selva") => 5
+- Can be used with: string, list, tuple, set, dict
 
-Length function:
- keyword: len()   => len("selva")   => 5
-(len() is a function it returns a new value. Can store it in a variable.)
+EXAMPLE:
+ length = len("hello")  # Store in variable
 
+MEMBERSHIP OPERATORS ("in" and "not in"):
+- Check if a value exists in a sequence
+- Returns: Boolean (True or False)
+- Works with: string, list, tuple, set, dict
 
-Can use len() function with string, list, tuple, set, dict. 
-
-
-"In" and "not in": 
-
-these will return boolean value. We can use to check if anything present in any string, dict, set, list, tuple. 
-
-EG:
+EXAMPLE:
  myStr = "happy birthday!"
- print("birthday" in myStr)  => True
+ print("birthday" in myStr)      => True
+ print("goodbye" not in myStr)   => True
 
 
