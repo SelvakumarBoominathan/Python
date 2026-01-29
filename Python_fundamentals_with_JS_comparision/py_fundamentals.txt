@@ -1,0 +1,60 @@
+Created : Guido van Rossum
+Released: 1991
+
+Uses Indentation to define scope.
+ check version = in cmd -> python --version
+
+
+In cmd-> py + enter (creates py env, we can write python commands.)
+
+In cmd -> exit()  (this will end our python mode in cmd prompt)
+
+SYNTAX:
+Use 4 space to create scope. 
+
+Single line comment : use "#"
+Multi line comment: use '''  tripple single quote.
+
+Input is always a string. 
+
+Python is dynamically typed language.
+
+Even variable declaration keyword is not required.
+
+Checking type : FUNCTION. type(). EG: type("hello")  => <class 'str'>
+
+
+Casting: FUNCTION : str(3) => "3", int(3) => 3, float(3) => 3.0
+
+
+Declaring variable: 
+Start with letter or underscore. No numbers, case sensitive, don’t use inbuild keywords as variable name.
+1. camel case => myVariableName = "John"
+2.Pascalcase => MyVariableName = "John"
+3.snakecase => my_variable_name = "John"
+
+Unpacking - similar to array DE structuring in JS.
+fruits = ["apple", "banana", "cherry"]
+x, y, z = fruits
+
+
+Global variables: 
+Variables declared outside of the function. Can be used anywhere in the program. 
+
+Local variable: 
+Variables declared inside the function. Can be used anywhere in the program. 
+
+use "global" keyword to convert a local variable as global one.
+
+
+
+Data types:
+Type	Python (keyword)	JS (keyword)
+Text	str	String
+Numeric	Int, float, complex	Number
+Sequence	List, tuple, range	Array
+Mapping	dict	Object
+set	set, frozenset	
+Boolean	True, false	True, False
+Binary	bytes, bytearray, memoryview	
+None type	none	Undefined, null
