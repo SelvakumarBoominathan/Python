@@ -46,16 +46,55 @@ UNPACKING:
 
 
 
-+----------+------------------------+---------------------+
-| Data Type| Python (keyword)       | JS (keyword)        |
-+----------+------------------------+---------------------+
-| Text     | str                    | String              |
-| Numeric  | int, float, complex    | Number              |
-| Sequence | list, tuple, range     | Array               |
-| Mapping  | dict                   | Object              |
-| Set      | set, frozenset         |                     |
-| Boolean  | True, False            | true, false         |
-| Binary   | bytes, bytearray,      |                     |
-|          | memoryview             |                     |
-| None type| None                   | undefined, null     |
-+----------+------------------------+---------------------+
+DATA TYPES - PYTHON vs JAVASCRIPT:
+
+┌─────────────┬──────────────────────────┬──────────────────────────┐
+│ Type        │ Python                   │ JavaScript               │
+├─────────────┼──────────────────────────┼──────────────────────────┤
+│ Text        │ str                      │ String                   │
+│ Integer     │ int                      │ Number                   │
+│ Float       │ float                    │ Number                   │
+│ Complex     │ complex                  │ ❌ Not supported         │
+│ List        │ list (ordered, mutable)  │ Array                    │
+│ Tuple       │ tuple (ordered, immutable)│ ❌ Use Object or Array   │
+│ Range       │ range(start, end)        │ ❌ Use loops or Array    │
+│ Dictionary  │ dict (key-value)         │ Object                   │
+│ Set         │ set (unordered, unique)  │ Set (ES6+)               │
+│ Frozen Set  │ frozenset (immutable)    │ ❌ Not supported         │
+│ Boolean     │ True, False (capitalized)│ true, false (lowercase)  │
+│ Null/None   │ None                     │ null, undefined          │
+│ Bytes       │ bytes, bytearray         │ ArrayBuffer, Uint8Array  │
+└─────────────┴──────────────────────────┴──────────────────────────┘
+
+KEY DIFFERENCES:
+- Python: Strong typing distinction (int vs float)
+- JavaScript: Number type for all numeric values
+- Python: Immutable tuples & frozensets
+- JavaScript: Limited immutable alternatives
+
+
+StringS:
+Strings are immutable. We cannot modify once declared. We can access using indexing and loop through it.
+
+
+ for x in "banana":
+      print(x)
+
+
+Length function:
+ keyword: len()   => len("selva")   => 5
+(len() is a function it returns a new value. Can store it in a variable.)
+
+
+Can use len() function with string, list, tuple, set, dict. 
+
+
+"In" and "not in": 
+
+these will return boolean value. We can use to check if anything present in any string, dict, set, list, tuple. 
+
+EG:
+ myStr = "happy birthday!"
+ print("birthday" in myStr)  => True
+
+
