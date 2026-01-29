@@ -21,11 +21,23 @@ Python is dynamically typed language.
 
 Even variable declaration keyword is not required.
 
+
+
 Checking type : FUNCTION. type(). EG: type("hello")  => <class 'str'>
 
 
-Casting: FUNCTION : str(3) => "3", int(3) => 3, float(3) => 3.0
-
+Casting: FUNCTION : 
+str(3) => "3"
+int(3) => 3
+float(3) => 3.0
+complex(1j)
+list(("apple", "banana", "cherry"))
+x = tuple(("apple", "banana", "cherry"))
+range(6) => (0,6) => [0,1,2,3,4,5]
+dict(name="John", age=36)
+set(("apple", "banana", "cherry"))
+frozenset(("apple", "banana", "cherry"))
+bool(5)
 
 Declaring variable: 
 Start with letter or underscore. No numbers, case sensitive, don’t use inbuild keywords as variable name.
@@ -51,10 +63,10 @@ use "global" keyword to convert a local variable as global one.
 Data types:
 Type	Python (keyword)	JS (keyword)
 Text	str	String
-Numeric	Int, float, complex	Number
-Sequence	List, tuple, range	Array
+Numeric	int, float, complex	Number
+Sequence	list, tuple, range	Array
 Mapping	dict	Object
 set	set, frozenset	
-Boolean	True, false	True, False
+Boolean	True, False	true, false
 Binary	bytes, bytearray, memoryview	
-None type	none	Undefined, null
+None type	None	undefined, null
