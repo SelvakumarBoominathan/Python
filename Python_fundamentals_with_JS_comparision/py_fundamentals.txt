@@ -151,7 +151,7 @@ EXAMPLES:
  print(Name[-2:])      => "ld" (last 2 characters)
  print(Name[:-2])      => "Hello Wor" (all except last 2 characters)
  print(Name[-4:-2])    => "Wo" (from index -4 to -3, -2 excluded)
- print(Name[::2])      => "HloWrd" (every 2nd character)
+ print(Name[::2])      => "HloWrd" (every 2nd character. it basically adds step in slicing.)
  print(Name[::-1])     => "dlroW olleH" (reverse string)
 
 KEY POINTS:
