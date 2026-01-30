@@ -144,7 +144,7 @@ STRING SLICING:
 - step: increment between indices (default 1)
 
 EXAMPLES:
- Name = "Hello World"
+ Name = "Hello World "
  print(Name[2:5])      => "llo" (index 2 to 4, index 5 excluded)
  print(Name[2:])       => "llo World" (from index 2 to end)
  print(Name[:4])       => "Hell" (from start to index 3, index 4 excluded)
@@ -158,3 +158,86 @@ KEY POINTS:
 - Negative indices: -1 is last character, -2 is second last, etc.
 - Slicing returns new string (strings are immutable)
 - Out of range indices don't cause errors
+
+
+*** NOTE: STRING METHODS RETURN NEW VALUES NOT UPDATING THE ORIGINAL STRING ***
+
+STRING METHODS:
+
+CASE CONVERSION:
+- name.upper()           => "HELLO WORLD" (converts to uppercase)
+- name.lower()           => "hello world" (converts to lowercase)
+- name.swapcase()        => "hELLO wORLD" (swaps case of each character)
+- name.capitalize()      => "Hello world" (first character uppercase, rest lowercase)
+- name.title()           => "Hello World" (first character of each word uppercase)
+
+WHITESPACE HANDLING:
+- name.strip()           => "Hello World" (removes whitespace from both ends)
+- name.lstrip()          => "Hello World " (removes whitespace from left end only)
+- name.rstrip()          => " Hello World" (removes whitespace from right end only)
+
+SPLITTING & JOINING:
+- name.split(" ")        => ["Hello", "World"] (splits string into list by delimiter)
+- name.rsplit(" ")       => ["Hello", "World"] (splits from right, useful with maxsplit)
+- name.join(list)        => "Hello-World" (joins list elements with string as separator)
+  EXAMPLE: "-".join(["Hello", "World"]) => "Hello-World"
+
+SEARCHING & REPLACING:
+- name.replace("o", "0") => "Hell0 W0rld" (replaces all occurrences)
+- name.find("World")     => 6 (returns index of first occurrence, -1 if not found)
+- name.rfind("o")        => 7 (returns index of last occurrence)
+- name.index("World")    => 6 (like find(), but raises error if not found)
+- name.rindex("o")       => 7 (like rfind(), but raises error if not found)
+- name.count("l")        => 3 (counts occurrences of substring)
+
+CHECKING CONDITIONS:
+- name.startswith("He")  => True (checks if string starts with substring)
+- name.endswith("ld")    => True (checks if string ends with substring)
+- name.isspace()         => False (checks if all characters are whitespace)
+- name.isalpha()         => False (checks if all characters are alphabetic)
+- name.isdigit()         => False (checks if all characters are digits)
+- name.isalnum()         => False (checks if all characters are alphanumeric)
+- name.islower()         => False (checks if all characters are lowercase)
+- name.isupper()         => False (checks if all characters are uppercase)
+
+FORMATTING:
+- name.format()          => formats string with placeholders
+  EXAMPLE: "My name is {}".format("John") => "My name is John"
+  EXAMPLE: "{}+{}={}".format(2, 3, 5) => "2+3=5"
+
+STRING CONCATENATION:
+- Use "+" operator: "Hello" + " " + "World" => "Hello World"
+
+F-STRINGS (Formatted String Literals):
+- Syntax: f"text {variable} text"
+- Supports expressions, function calls, formatting
+
+EXAMPLES:
+  name = "Emili"
+  age = 25
+  txt = f"My name is {name}"              => "My name is Emili"
+  txt = f"Next year I'll be {age + 1}"    => "Next year I'll be 26"
+  
+  def get_price():
+      return 200
+  
+  txt = f"The price is {get_price():.2f} dollars"  => "The price is 200.00 dollars"
+
+ESCAPE CHARACTERS:
+- Use backslash "\" to escape special characters in strings
+
+COMMON ESCAPE SEQUENCES:
+- \n    => newline
+- \t    => tab (horizontal indentation)
+- \r    => carriage return
+- \b    => backspace
+- \\    => backslash
+- \"    => double quote
+- \'    => single quote
+- \0    => null character
+
+EXAMPLES:
+  print("Hello\nWorld")    => Hello
+                              World
+  print("Name:\tJohn")     => Name:	John
+  print("Path: C:\\Users") => Path: C:\Users
