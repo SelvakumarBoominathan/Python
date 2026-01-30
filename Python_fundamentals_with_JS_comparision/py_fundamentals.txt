@@ -136,4 +136,5 @@ EXAMPLE:
  print("birthday" in myStr)      => True
  print("goodbye" not in myStr)   => True
 
-
+Slicing in String:
+ 
