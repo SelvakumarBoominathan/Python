@@ -136,5 +136,25 @@ EXAMPLE:
  print("birthday" in myStr)      => True
  print("goodbye" not in myStr)   => True
 
-Slicing in String:
- 
+
+STRING SLICING:
+- Syntax: string[start:end:step]
+- start: beginning index (inclusive, default 0)
+- end: ending index (exclusive)
+- step: increment between indices (default 1)
+
+EXAMPLES:
+ Name = "Hello World"
+ print(Name[2:5])      => "llo" (index 2 to 4, index 5 excluded)
+ print(Name[2:])       => "llo World" (from index 2 to end)
+ print(Name[:4])       => "Hell" (from start to index 3, index 4 excluded)
+ print(Name[-2:])      => "ld" (last 2 characters)
+ print(Name[:-2])      => "Hello Wor" (all except last 2 characters)
+ print(Name[-4:-2])    => "Wo" (from index -4 to -3, -2 excluded)
+ print(Name[::2])      => "HloWrd" (every 2nd character)
+ print(Name[::-1])     => "dlroW olleH" (reverse string)
+
+KEY POINTS:
+- Negative indices: -1 is last character, -2 is second last, etc.
+- Slicing returns new string (strings are immutable)
+- Out of range indices don't cause errors
