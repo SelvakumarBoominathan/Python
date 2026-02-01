@@ -1,0 +1,45 @@
+collection data types
+
+COMPARISON TABLE: Lists, Tuples, Sets, and Dictionaries in Python
+================================================================
+
+┌─────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┐
+│ Feature     │ List             │ Tuple            │ Set              │ Dict             │
+├─────────────┼──────────────────┼──────────────────┼──────────────────┼──────────────────┤
+│ Syntax      │ [ ]              │ ( )              │ { }              │ {key: value}     │
+│ Ordered     │ Yes              │ Yes              │ No               │ Yes (3.7+)       │
+│ Mutable     │ Yes              │ No               │ Yes              │ Yes              │
+│ Indexed     │ Yes              │ Yes              │ No               │ Yes (by key)     │
+│ Duplicates  │ Allowed          │ Allowed          │ Not Allowed      │ Keys: Not Allowed│
+│ Use Case    │ Flexible storage │ Immutable data   │ Unique items     │ Key-value pairs  │
+└─────────────┴──────────────────┴──────────────────┴──────────────────┴──────────────────┘
+
+SIMPLE EXAMPLES:
+===============
+
+LIST - Ordered, Mutable, Allows Duplicates
+-------------------------------------------
+fruits = ["apple", "banana", "orange", "apple"]
+fruits[0] = "mango"  # Can modify
+fruits.append("grape")  # Can add items
+# Output: ["mango", "banana", "orange", "apple", "grape"]
+
+TUPLE - Ordered, Immutable, Allows Duplicates
+----------------------------------------------
+coordinates = (10, 20, 30)
+# coordinates[0] = 5  # ERROR! Cannot modify
+x, y, z = coordinates  # Can unpack
+# Output: (10, 20, 30)
+
+SET - Unordered, Mutable, No Duplicates
+----------------------------------------
+colors = {"red", "blue", "green", "red"}
+colors.add("yellow")
+# Output: {"red", "blue", "green", "yellow"}  # Only 1 "red"
+
+DICT - Key-Value Pairs, Mutable, Unique Keys
+---------------------------------------------
+student = {"name": "John", "age": 25, "grade": "A"}
+student["age"] = 26  # Can modify
+student["city"] = "NYC"  # Can add new key-value
+# Output: {"name": "John", "age": 26, "grade": "A", "city": "NYC"}
