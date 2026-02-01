@@ -1,86 +1,367 @@
+PYTHON BASICS:
 Created : Guido van Rossum
 Released: 1991
+Latest Version: 3.12+ (Python 2 reached end-of-life in 2020)
 
-BASICS:
-- Uses indentation (4 spaces) to define code scope
+GETTING STARTED:
 - Check version: python --version (in command prompt)
 - Interactive mode: Type "py" in cmd, then exit() to quit
+- Run file: python filename.py
+- Uses indentation (4 spaces) to define code scope
+- Python is case-sensitive
 
 COMMENTS:
 - Single line: # comment
-- Multi-line: ''' comment text '''
+- Multi-line: ''' comment text ''' or """ comment text """
+- Docstrings: """ description """ (used for function/class documentation)
 
-DATA INPUT:
+DATA INPUT & OUTPUT:
 - input() function always returns a string
+- print() function outputs to console, accepts multiple arguments
+  EXAMPLE: print("Hello", name, age) => Hello John 25
 - Python is dynamically typed (no type declaration needed)
 
 TYPE CHECKING & CASTING:
 - Check type: type(variable) => returns data type
+- Type checking: isinstance(variable, type) => returns boolean
 - Cast to string: str(value)
-- Cast to integer: int(value)
+- Cast to integer: int(value) [truncates float, errors on invalid string]
 - Cast to float: float(value)
 - Cast to list: list(tuple_or_sequence)
 - Cast to tuple: tuple(sequence)
-- Cast to dict: dict(key=value, ...)
+- Cast to dict: dict(key=value, ...) or dict(iterable)
 - Cast to set: set(sequence)
 - Cast to boolean: bool(value)
 
 VARIABLE NAMING RULES:
 - Start with letter or underscore (_)
+- Can contain letters, numbers, underscores
 - No numbers at start
 - Case-sensitive
-- Avoid Python keywords
+- Avoid Python keywords (if, else, for, while, def, class, etc.)
 - Naming conventions:
   * camelCase: myVariableName
-  * PascalCase: MyVariableName
-  * snake_case: my_variable_name
+  * PascalCase: MyVariableName (for classes)
+  * snake_case: my_variable_name (preferred for variables/functions)
+  * UPPER_CASE: CONSTANT_VALUE
+
+PYTHON KEYWORDS:
+False, None, True, and, as, assert, async, await, break, class, continue, def,
+del, elif, else, except, finally, for, from, global, if, import, in, is, lambda,
+nonlocal, not, or, pass, raise, return, try, while, with, yield
 
 VARIABLE SCOPE:
 - Global: declared outside functions, accessible everywhere
 - Local: declared inside functions, accessible only within function
-- Use "global" keyword to make local variable global
+- Enclosing: in nested functions (accessible to inner functions)
+- Built-in: Python's built-in namespace
+- Use "global" keyword to modify global variable inside function
+- Use "nonlocal" keyword to modify enclosing function variable
 
+SCOPE EXAMPLE:
+  x = "global"
+  def outer():
+      x = "enclosing"
+      def inner():
+          nonlocal x  # refers to outer's x
+          x = "local"
+  
 UNPACKING:
 - Assign multiple values at once
+- Order matters for sequences
 - Example: x, y, z = ["apple", "banana", "cherry"]
+- Extended unpacking: a, *middle, z = [1, 2, 3, 4, 5] => a=1, middle=[2,3,4], z=5
+- Swapping: x, y = y, x
 
 OPERATORS:
-- Arithmetic: +, -, *, /, //, %, **
-- Comparison: ==, !=, <, >, <=, >=
-- Logical: and, or, not
-- Assignment: =, +=, -=, *=, /=, //=, %=, **=
-- Bitwise: &, |, ^, ~, <<, >>
-- Identity: is, is not
-- Membership: in, not in
+
+ARITHMETIC OPERATORS:
+- +  Addition
+- -  Subtraction
+- *  Multiplication
+- /  Division (returns float)
+- // Floor division (returns integer)
+- %  Modulus (remainder)
+- ** Exponentiation
+
+COMPARISON OPERATORS:
+- ==  Equal to
+- !=  Not equal to
+- <   Less than
+- >   Greater than
+- <=  Less than or equal to
+- >=  Greater than or equal to
+
+LOGICAL OPERATORS:
+- and  Returns True if both statements are true
+- or   Returns True if one statement is true
+- not  Reverses the result
+
+ASSIGNMENT OPERATORS:
+- =   Assignment
+- +=  Add and assign (x += 5 => x = x + 5)
+- -=  Subtract and assign
+- *=  Multiply and assign
+- /=  Divide and assign
+- //= Floor divide and assign
+- %=  Modulus and assign
+- **= Exponentiation and assign
+
+BITWISE OPERATORS:
+- &   AND (both bits 1)
+- |   OR (at least one bit 1)
+- ^   XOR (bits different)
+- ~   NOT (inverts bits)
+- <<  Left shift (multiply by 2^n)
+- >>  Right shift (divide by 2^n)
+
+IDENTITY OPERATORS:
+- is      Returns True if both variables reference the same object (memory)
+- is not  Returns True if variables reference different objects
+NOTE: is vs == : is checks memory location, == checks value equality
+
+MEMBERSHIP OPERATORS:
+- in      Returns True if value exists in sequence
+- not in  Returns True if value does not exist in sequence
+
+WALRUS OPERATOR:
+- := Assigns and returns value in same expression (Python 3.8+)
+  EXAMPLE: if (n := len(list)) > 10: print(f"List is long: {n}")
+
+OPERATOR PRECEDENCE (highest to lowest):
+1.  ()              Parentheses
+2.  **              Exponentiation
+3.  +x, -x, ~x      Unary plus, minus, bitwise NOT
+4.  *, /, //, %     Multiplication, division, floor division, modulus
+5.  +, -            Addition, subtraction
+6.  <<, >>          Bitwise shifts
+7.  &               Bitwise AND
+8.  ^               Bitwise XOR
+9.  |               Bitwise OR
+10. ==, !=, <, >, <=, >=, is, is not, in, not in  Comparisons
+11. not             Logical NOT
+12. and             Logical AND
+13. or              Logical OR
+14. if-else         Ternary conditional
+15. lambda          Lambda expression
+16. :=              Walrus operator
+
+CHAINED COMPARISONS:
+- x = 5
+- print(1 < x < 10)           => True
+- print(1 < x and x < 10)     => True (equivalent)
+- Works with multiple operators: 1 < x <= 10 < 20
 
 CONTROL FLOW:
-- Conditional: if, elif, else
-- Loops: for, while
-- Loop control: break, continue, pass
-- Exception handling: try, except, else, finally
+
+CONDITIONALS:
+- if condition:
+      # code block (indented)
+- elif another_condition:
+      # code block
+- else:
+      # code block
+
+- Ternary: value_if_true if condition else value_if_false
+  EXAMPLE: status = "Adult" if age >= 18 else "Minor"
+
+LOOPS:
+- for item in iterable:
+      # code block
+- for i in range(start, end, step):
+      # step is optional (default 1)
+- while condition:
+      # code block
+
+LOOP CONTROL:
+- break     Exits loop immediately
+- continue  Skips current iteration, continues to next
+- pass      Does nothing (placeholder)
+- else clause: executes if loop completes normally (no break)
+  EXAMPLE:
+    for i in range(5):
+        if i == 3: break
+    else:
+        print("Completed")  # Won't print if break occurs
+
+EXCEPTION HANDLING:
+- try:
+      # code that might raise exception
+  except SpecificError:
+      # handle specific error
+  except (Error1, Error2):
+      # handle multiple errors
+  except:
+      # handle all errors (not recommended)
+  else:
+      # executes if no exception
+  finally:
+      # always executes (cleanup code)
+
+COMMON EXCEPTIONS:
+- ValueError: invalid value for operation
+- TypeError: wrong data type
+- IndexError: index out of range
+- KeyError: dictionary key not found
+- FileNotFoundError: file doesn't exist
+- ZeroDivisionError: division by zero
+- AttributeError: attribute doesn't exist
+- NameError: variable not defined
+
+RAISING EXCEPTIONS:
+- raise ValueError("Custom message")
+- raise TypeError("Expected int, got str")
 
 FUNCTIONS:
-- Definition: def function_name(parameters):
-- Return values: return statement
-- Default parameters: def func(x=5):
-- *args: variable positional arguments
-- **kwargs: variable keyword arguments
-- Lambda: lambda x: x + 2 (anonymous functions)
+
+BASIC DEFINITION:
+- def function_name(parameters):
+      """Docstring describing function"""
+      return value
+
+PARAMETERS & ARGUMENTS:
+- Positional: func(1, 2, 3)
+- Default: def func(x=5, y=10):
+- *args: variable positional arguments (tuple)
+  EXAMPLE: def func(*args): print(args)
+           func(1, 2, 3) => (1, 2, 3)
+- **kwargs: variable keyword arguments (dictionary)
+  EXAMPLE: def func(**kwargs): print(kwargs)
+           func(name="John", age=25) => {'name': 'John', 'age': 25}
+- Keyword-only: def func(*, required_kwarg):
+  EXAMPLE: func(x=5) # must use keyword, can't pass positionally
+
+ORDER OF PARAMETERS:
+1. Positional parameters
+2. *args
+3. Keyword-only parameters
+4. **kwargs
+
+EXAMPLE: def func(a, b, *args, x=5, **kwargs):
+
+RETURN VALUES:
+- return statement (can return single or multiple values)
+- return a, b, c => returns tuple (can unpack)
+- No return statement => returns None
+
+LAMBDA (ANONYMOUS FUNCTIONS):
+- Syntax: lambda arguments: expression
+- Returns value implicitly
+- Single expression only
+- EXAMPLE: square = lambda x: x ** 2
+- Use with map(), filter(), sorted()
+  EXAMPLE: list(map(lambda x: x * 2, [1, 2, 3])) => [2, 4, 6]
+
+DECORATORS:
+- Function that modifies another function
+- @decorator syntax
+- EXAMPLE:
+    def decorator(func):
+        def wrapper():
+            print("Before")
+            func()
+            print("After")
+        return wrapper
+    
+    @decorator
+    def my_func():
+        print("Inside")
 
 COLLECTIONS:
-- List: mutable, ordered, allows duplicates
-- Tuple: immutable, ordered, allows duplicates
-- Set: unordered, unique values, mutable
-- Dictionary: key-value pairs, unordered (Python 3.7+: ordered)
+
+LIST (Mutable, Ordered, Allows Duplicates):
+- Creation: [], [1, 2, 3], list()
+- Access: list[index], list[index:end:step]
+- Add: list.append(item), list.extend([items]), list.insert(index, item)
+- Remove: list.remove(item), list.pop(index), list.clear()
+- Other: list.sort(), list.reverse(), list.count(item), list.index(item)
+- Slicing: list[start:end:step]
+
+TUPLE (Immutable, Ordered, Allows Duplicates):
+- Creation: (), (1, 2, 3), tuple()
+- Single element: (1,) [trailing comma required]
+- Access: tuple[index], tuple[start:end:step]
+- Immutable: can't modify after creation
+- Methods: count(item), index(item)
+- Use case: return multiple values, dict keys, prevent modification
+
+SET (Unordered, Unique Values, Mutable):
+- Creation: {1, 2, 3}, set()
+- No indexing (unordered)
+- Add: set.add(item), set.update([items])
+- Remove: set.remove(item), set.discard(item), set.pop(), set.clear()
+- Operations: union (|), intersection (&), difference (-), symmetric_difference (^)
+- Methods: issubset(), issuperset(), isdisjoint()
+
+DICTIONARY (Key-Value Pairs, Ordered in 3.7+, Mutable):
+- Creation: {}, {'key': value}, dict()
+- Access: dict[key], dict.get(key, default)
+- Add/Update: dict[key] = value, dict.update({key: value})
+- Remove: del dict[key], dict.pop(key), dict.clear()
+- Keys: dict.keys(), dict.values(), dict.items()
+- Methods: get(), setdefault(), pop(), update(), clear()
+
+FROZENSET (Immutable, Unique Values):
+- Creation: frozenset([1, 2, 3])
+- Can be used as dict key
+- Immutable set operations
+
+STRINGS (Immutable, Ordered):
+- Creation: "", '', """"""
+- Access: str[index], str[start:end:step]
+- Concatenation: str + str, f-strings
+- Methods: upper(), lower(), split(), strip(), replace(), find(), etc.
+- Immutable: operations return new string, don't modify original
 
 BUILT-IN FUNCTIONS:
-- print(), len(), type(), isinstance()
-- min(), max(), sum(), abs()
-- sorted(), reversed(), enumerate()
-- zip(), map(), filter()
-- all(), any(), range()
 
+I/O FUNCTIONS:
+- print(*args, sep=' ', end='\n')  Output to console
+- input(prompt)                     Read from user (returns string)
 
+TYPE FUNCTIONS:
+- type(object)           Returns data type
+- isinstance(obj, type)  Checks if object is instance of type
+
+NUMERIC FUNCTIONS:
+- abs(x)                 Absolute value
+- round(x, ndigits)      Rounds to n decimal places
+- pow(x, y)              x to power y (same as x**y)
+- min(*args)             Minimum value
+- max(*args)             Maximum value
+- sum(iterable, start=0) Sum of items
+
+SEQUENCE FUNCTIONS:
+- len(sequence)          Length of sequence
+- sorted(iterable, key=None, reverse=False)  Returns sorted list
+- reversed(sequence)     Returns reverse iterator
+- enumerate(iterable, start=0)  Returns index and value pairs
+- zip(*iterables)        Combines multiple iterables
+- list(), tuple(), set(), dict()  Converts to collection type
+
+FUNCTIONAL PROGRAMMING:
+- map(function, iterable)  Applies function to each item
+  EXAMPLE: list(map(str.upper, ['a', 'b', 'c']))
+- filter(function, iterable)  Filters items where function returns True
+  EXAMPLE: list(filter(lambda x: x > 2, [1, 2, 3, 4]))
+- all(iterable)          Returns True if all items are truthy
+- any(iterable)          Returns True if any item is truthy
+
+ITERATION:
+- range(start, stop, step)  Generates sequence of numbers
+
+OBJECT FUNCTIONS:
+- id(object)             Returns unique identifier (memory address)
+- dir(object)            Lists object attributes
+- hasattr(object, name)  Checks if object has attribute
+- getattr(object, name, default)  Gets attribute value
+- setattr(object, name, value)    Sets attribute value
+- callable(object)       Checks if object is callable
+
+EVAL/EXECUTION:
+- eval(expression)       Evaluates string as Python expression
+- exec(code)             Executes string as Python code
+- compile(source, filename, mode)  Compiles code object
 
 DATA TYPES - PYTHON vs JAVASCRIPT:
 
@@ -88,9 +369,9 @@ DATA TYPES - PYTHON vs JAVASCRIPT:
 │ Type        │ Python                   │ JavaScript               │
 ├─────────────┼──────────────────────────┼──────────────────────────┤
 │ Text        │ str                      │ String                   │
-│ Integer     │ int                      │ Number                   │
-│ Float       │ float                    │ Number                   │
-│ Complex     │ complex                  │ ❌ Not supported         │
+│ Integer     │ int (unlimited precision)│ Number (64-bit float)    │
+│ Float       │ float (IEEE 754)         │ Number                   │
+│ Complex     │ complex (a+bj)           │ ❌ Not supported         │
 │ List        │ list (ordered, mutable)  │ Array                    │
 │ Tuple       │ tuple (ordered, immutable)│ ❌ Use Object or Array   │
 │ Range       │ range(start, end)        │ ❌ Use loops or Array    │
@@ -100,128 +381,170 @@ DATA TYPES - PYTHON vs JAVASCRIPT:
 │ Boolean     │ True, False (capitalized)│ true, false (lowercase)  │
 │ Null/None   │ None                     │ null, undefined          │
 │ Bytes       │ bytes, bytearray         │ ArrayBuffer, Uint8Array  │
+│ Decimal     │ Decimal (from module)    │ BigInt (arbitrary size)  │
 └─────────────┴──────────────────────────┴──────────────────────────┘
 
 KEY DIFFERENCES:
 - Python: Strong typing distinction (int vs float)
-- JavaScript: Number type for all numeric values
+- JavaScript: Number type for all numeric values (except BigInt)
+- Python: Integers have unlimited precision
+- JavaScript: Numbers limited to 64-bit IEEE 754
 - Python: Immutable tuples & frozensets
 - JavaScript: Limited immutable alternatives
-
+- Python: None (null equivalent)
+- JavaScript: null and undefined (different meanings)
 
 STRINGS:
-- Immutable: Cannot modify after creation
-- Access: Use indexing and loops to iterate through characters
+
+IMMUTABILITY:
+- Strings cannot be modified after creation
+- String methods return new strings
+- Use string instead of changing original
+
+ACCESSING STRINGS:
+- Indexing: str[0] (first character), str[-1] (last character)
+- Iteration: for char in string:
+- Negative indices: -1 last char, -2 second last, etc.
 
 EXAMPLE:
- for x in "banana":
-  print(x)
+  for x in "banana":
+      print(x)
 
 LENGTH FUNCTION:
 - Keyword: len()
 - Returns the number of characters in a string
 - Example: len("selva") => 5
-- Can be used with: string, list, tuple, set, dict
-
-EXAMPLE:
- length = len("hello")  # Store in variable
-
-MEMBERSHIP OPERATORS ("in" and "not in"):
-- Check if a value exists in a sequence
-- Returns: Boolean (True or False)
 - Works with: string, list, tuple, set, dict
 
-EXAMPLE:
- myStr = "happy birthday!"
- print("birthday" in myStr)      => True
- print("goodbye" not in myStr)   => True
+MEMBERSHIP OPERATORS ("in" and "not in"):
+- Check if value exists in sequence
+- Returns: Boolean (True or False)
+- Works with: string, list, tuple, set, dict
+- Case-sensitive for strings
 
+EXAMPLE:
+  myStr = "happy birthday!"
+  print("birthday" in myStr)      => True
+  print("goodbye" not in myStr)   => True
+  print("HAPPY" in myStr)         => False (case-sensitive)
 
 STRING SLICING:
 - Syntax: string[start:end:step]
 - start: beginning index (inclusive, default 0)
 - end: ending index (exclusive)
-- step: increment between indices (default 1)
+- step: increment between indices (default 1, can be negative)
+- All parameters optional, negative indices supported
 
-EXAMPLES:
- Name = "Hello World "
- print(Name[2:5])      => "llo" (index 2 to 4, index 5 excluded)
- print(Name[2:])       => "llo World" (from index 2 to end)
- print(Name[:4])       => "Hell" (from start to index 3, index 4 excluded)
- print(Name[-2:])      => "ld" (last 2 characters)
- print(Name[:-2])      => "Hello Wor" (all except last 2 characters)
- print(Name[-4:-2])    => "Wo" (from index -4 to -3, -2 excluded)
- print(Name[::2])      => "HloWrd" (every 2nd character. it basically adds step in slicing.)
- print(Name[::-1])     => "dlroW olleH" (reverse string)
+SLICING EXAMPLES:
+  Name = "Hello World "
+  print(Name[2:5])      => "llo"          (index 2 to 4)
+  print(Name[2:])       => "llo World "   (from index 2 to end)
+  print(Name[:4])       => "Hell"         (from start to index 3)
+  print(Name[-2:])      => "d "           (last 2 characters)
+  print(Name[:-2])      => "Hello Worl"   (all except last 2)
+  print(Name[-4:-2])    => "Wo"           (from index -4 to -3)
+  print(Name[::2])      => "HloWrd"       (every 2nd character)
+  print(Name[::-1])     => " dlroW olleH" (reverse string)
+  print(Name[2:8:2])    => "lWr"          (start:end:step combined)
 
 KEY POINTS:
-- Negative indices: -1 is last character, -2 is second last, etc.
 - Slicing returns new string (strings are immutable)
-- Out of range indices don't cause errors
-
+- Out of range indices don't cause errors (returns partial string)
+- Negative indices: start from end of string
+- Empty slices: returns empty string
 
 *** NOTE: STRING METHODS RETURN NEW VALUES NOT UPDATING THE ORIGINAL STRING ***
 
 STRING METHODS:
 
 CASE CONVERSION:
-- name.upper()           => "HELLO WORLD" (converts to uppercase)
-- name.lower()           => "hello world" (converts to lowercase)
-- name.swapcase()        => "hELLO wORLD" (swaps case of each character)
-- name.capitalize()      => "Hello world" (first character uppercase, rest lowercase)
-- name.title()           => "Hello World" (first character of each word uppercase)
+- name.upper()           => "HELLO WORLD"    (uppercase)
+- name.lower()           => "hello world"    (lowercase)
+- name.swapcase()        => "hELLO wORLD"    (swap case)
+- name.capitalize()      => "Hello world"    (first char uppercase)
+- name.title()           => "Hello World"    (each word capitalized)
 
 WHITESPACE HANDLING:
-- name.strip()           => "Hello World" (removes whitespace from both ends)
-- name.lstrip()          => "Hello World " (removes whitespace from left end only)
-- name.rstrip()          => " Hello World" (removes whitespace from right end only)
+- name.strip()           => "Hello World"    (remove both ends)
+- name.lstrip()          => "Hello World "   (remove left end)
+- name.rstrip()          => " Hello World"   (remove right end)
+- name.strip(chars)      => remove specific characters
 
 SPLITTING & JOINING:
-- name.split(" ")        => ["Hello", "World"] (splits string into list by delimiter)
-- name.rsplit(" ")       => ["Hello", "World"] (splits from right, useful with maxsplit)
-- name.join(list)        => "Hello-World" (joins list elements with string as separator)
-  EXAMPLE: "-".join(["Hello", "World"]) => "Hello-World"
+- name.split(" ")        => ["Hello", "World"]      (split by delimiter)
+- name.split()           => ["Hello", "World"]      (split by whitespace)
+- name.rsplit(" ", maxsplit)  => split from right
+- name.splitlines()      => splits by newline characters
+- "-".join(list)         => "Hello-World"          (join with separator)
+
+EXAMPLE: "-".join(["Hello", "World"]) => "Hello-World"
 
 SEARCHING & REPLACING:
-- name.replace("o", "0") => "Hell0 W0rld" (replaces all occurrences)
-- name.find("World")     => 6 (returns index of first occurrence, -1 if not found)
-- name.rfind("o")        => 7 (returns index of last occurrence)
-- name.index("World")    => 6 (like find(), but raises error if not found)
-- name.rindex("o")       => 7 (like rfind(), but raises error if not found)
-- name.count("l")        => 3 (counts occurrences of substring)
+- name.replace("o", "0")  => "Hell0 W0rld"     (replace all occurrences)
+- name.replace("o", "0", 1) => "Hell0 World"   (replace first n occurrences)
+- name.find("World")      => 6                  (index of first, -1 if not found)
+- name.rfind("o")         => 7                  (index of last occurrence)
+- name.index("World")     => 6                  (like find(), raises error if not found)
+- name.rindex("o")        => 7                  (like rfind(), raises error if not found)
+- name.count("l")         => 3                  (count occurrences)
 
 CHECKING CONDITIONS:
-- name.startswith("He")  => True (checks if string starts with substring)
-- name.endswith("ld")    => True (checks if string ends with substring)
-- name.isspace()         => False (checks if all characters are whitespace)
-- name.isalpha()         => False (checks if all characters are alphabetic)
-- name.isdigit()         => False (checks if all characters are digits)
-- name.isalnum()         => False (checks if all characters are alphanumeric)
-- name.islower()         => False (checks if all characters are lowercase)
-- name.isupper()         => False (checks if all characters are uppercase)
+- name.startswith("He")   => True              (checks prefix)
+- name.endswith("ld")     => True              (checks suffix)
+- name.isspace()          => False             (all whitespace)
+- name.isalpha()          => False             (all alphabetic)
+- name.isdigit()          => False             (all digits)
+- name.isalnum()          => False             (all alphanumeric)
+- name.islower()          => False             (all lowercase)
+- name.isupper()          => False             (all uppercase)
+- name.isidentifier()     => True              (valid identifier)
+- name.isdecimal()        => False             (all decimal chars)
+- name.isnumeric()        => False             (all numeric)
 
 FORMATTING:
-- name.format()          => formats string with placeholders
+- name.format()           => formats with placeholders
   EXAMPLE: "My name is {}".format("John") => "My name is John"
   EXAMPLE: "{}+{}={}".format(2, 3, 5) => "2+3=5"
+  EXAMPLE: "{0} {1} {0}".format("a", "b") => "a b a"
+  EXAMPLE: "{name} is {age}".format(name="John", age=30) => "John is 30"
+
+- format(value, format_spec)  => format specific value
+  EXAMPLE: format(123.456, ".2f") => "123.46"
 
 STRING CONCATENATION:
 - Use "+" operator: "Hello" + " " + "World" => "Hello World"
+- Use "*" operator: "ab" * 3 => "ababab"
+- Implicit concatenation: "Hello" "World" => "HelloWorld"
 
 F-STRINGS (Formatted String Literals):
 - Syntax: f"text {variable} text"
 - Supports expressions, function calls, formatting
+- Most efficient and readable method (Python 3.6+)
+- Supports format specs with colon: f"{value:format_spec}"
 
 EXAMPLES:
   name = "Emili"
   age = 25
   txt = f"My name is {name}"              => "My name is Emili"
   txt = f"Next year I'll be {age + 1}"    => "Next year I'll be 26"
+  txt = f"{name.upper()}"                 => "EMILI"
   
   def get_price():
       return 200
   
   txt = f"The price is {get_price():.2f} dollars"  => "The price is 200.00 dollars"
+  txt = f"{25:05d}"                               => "00025"
+  txt = f"{3.14159:.2f}"                          => "3.14"
+
+FORMAT SPECIFICATIONS:
+- {value:width}          => minimum width
+- {value:>width}         => right align
+- {value:<width}         => left align
+- {value:^width}         => center align
+- {value:.precision}     => decimal places
+- {value:0width}         => zero padding
+- {value:,}              => thousands separator
+- {value:e}              => scientific notation
 
 ESCAPE CHARACTERS:
 - Use backslash "\" to escape special characters in strings
@@ -231,42 +554,322 @@ COMMON ESCAPE SEQUENCES:
 - \t    => tab (horizontal indentation)
 - \r    => carriage return
 - \b    => backspace
-- \\    => backslash
+- \\    => backslash literal
 - \"    => double quote
 - \'    => single quote
 - \0    => null character
+- \x     => hex character: \x41 => 'A'
+- \u    => unicode: \u0041 => 'A'
+- \N{name}  => unicode by name: \N{LATIN CAPITAL LETTER A}
 
 EXAMPLES:
   print("Hello\nWorld")    => Hello
                               World
   print("Name:\tJohn")     => Name:	John
   print("Path: C:\\Users") => Path: C:\Users
+  print("She said \"Hi\"") => She said "Hi"
 
+RAW STRINGS (r-prefix):
+- Syntax: r"text"
+- Escape sequences treated as literals
+- Useful for regex, file paths, etc.
+- EXAMPLE: r"C:\Users\name" => "C:\Users\name" (backslash not escaped)
 
+TRIPLE-QUOTED STRINGS:
+- Syntax: """text""" or '''text'''
+- Can span multiple lines
+- Preserves newlines and formatting
+- Used for docstrings
 
-Boolean in Python: 
- True and False
+BOOLEAN:
 
- Truthy values: 
+BOOLEAN VALUES:
+- True  (capitalized)
+- False (capitalized)
 
+TRUTHY VALUES (convert to True):
+- Non-empty strings: "hello", "0"
+- Non-zero numbers: 1, -1, 0.1
+- Non-empty collections: [1, 2], {'a': 1}, {1, 2}
 
- Falsy values: 
- False, 0, [], {}, (), "", none
+FALSY VALUES (convert to False):
+- False itself
+- None
+- Zero values: 0, 0.0
+- Empty sequences: "", [], {}, (), set()
+- Objects with __len__() returning 0
+- Objects with __bool__() returning False
 
-NOTE: for falsy value: 
-class myclass():
-    def __len__(self):
-        return 0
+CUSTOM TRUTHY/FALSY:
+  class myclass():
+      def __len__(self):
+          return 0
+  
+  myobj = myclass()
+  print(bool(myobj))   => False (evaluates based on __len__)
 
-myobj = myclass()
-print(bool(myobj))   =>  False  (Nothe this will print false)
+ISINSTANCE FUNCTION:
+- Evaluates type and returns boolean
+- Syntax: isinstance(object, classinfo)
+- Can check multiple types: isinstance(x, (int, float))
 
+EXAMPLE:
+  x = 200
+  print(isinstance(x, int))        => True
+  print(isinstance(x, (int, str))) => True
+  print(isinstance(x, str))        => False
 
-*isinstance function : This evaluates & returns bool 
+TYPE CHECKING BEST PRACTICES:
+- Use isinstance() instead of type() for flexibility with inheritance
+- type(x) == int checks exact type
+- isinstance(x, int) checks type or subclass
 
-x = 200;
-print(isinstance(x, int))  => True
+COMPREHENSIONS:
 
-# Should be:
-x = 200
-print(isinstance(x, int))  # => True
+LIST COMPREHENSION:
+- Syntax: [expression for item in iterable if condition]
+- Creates new list with concise syntax
+- EXAMPLE: [x*2 for x in range(5)] => [0, 2, 4, 6, 8]
+- With condition: [x for x in range(10) if x % 2 == 0] => [0, 2, 4, 6, 8]
+- Nested: [[x*y for x in range(3)] for y in range(3)]
+
+DICT COMPREHENSION:
+- Syntax: {key: value for item in iterable if condition}
+- EXAMPLE: {x: x**2 for x in range(5)} => {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
+
+SET COMPREHENSION:
+- Syntax: {expression for item in iterable if condition}
+- EXAMPLE: {x for x in [1, 2, 2, 3, 3]} => {1, 2, 3}
+
+GENERATOR EXPRESSION:
+- Syntax: (expression for item in iterable if condition)
+- Returns generator (lazy evaluation, memory efficient)
+- EXAMPLE: gen = (x*2 for x in range(1000000))
+
+CLASSES & OBJECTS:
+
+CLASS DEFINITION:
+  class ClassName:
+      class_variable = value
+      
+      def __init__(self, parameters):
+          """Constructor"""
+          self.instance_variable = parameters
+      
+      def method(self):
+          """Instance method"""
+          return self.instance_variable
+      
+      @classmethod
+      def class_method(cls):
+          """Class method"""
+          return cls.class_variable
+      
+      @staticmethod
+      def static_method():
+          """Static method (no self or cls)"""
+          return "static"
+      
+      @property
+      def property_name(self):
+          """Property getter"""
+          return self._private_var
+      
+      @property_name.setter
+      def property_name(self, value):
+          """Property setter"""
+          self._private_var = value
+
+SPECIAL METHODS (__dunder__):
+- __init__(self)          Constructor
+- __str__(self)           String representation (print)
+- __repr__(self)          Developer representation
+- __len__(self)           len() support
+- __getitem__(self, key)  Indexing support
+- __setitem__(self, key)  Assignment support
+- __eq__(self, other)     Equality comparison
+- __lt__(self, other)     Less than comparison
+- __add__(self, other)    Addition operator
+- __call__(self)          Make instance callable
+- __enter__/__exit__      Context manager support
+
+INHERITANCE:
+  class Parent:
+      def method(self):
+          return "parent"
+  
+  class Child(Parent):
+      def method(self):
+          return super().method() + " child"
+
+ABSTRACT CLASSES:
+  from abc import ABC, abstractmethod
+  
+  class AbstractClass(ABC):
+      @abstractmethod
+      def method(self):
+          pass
+
+MODULES & IMPORTS:
+
+IMPORTING:
+- import module              Imports entire module
+- from module import name   Imports specific name
+- from module import *      Imports all (avoid in production)
+- import module as alias    Imports with alias
+
+COMMON MODULES:
+- sys               System operations
+- os                Operating system
+- math              Mathematical functions
+- random            Random number generation
+- datetime          Date and time
+- json              JSON encoding/decoding
+- re                Regular expressions
+- collections       Specialized containers
+- itertools         Iterator functions
+- functools         Functional programming tools
+- pathlib           File path operations
+- time              Time-related functions
+- urllib            URL operations
+- requests          HTTP library (third-party)
+- numpy             Numerical computing (third-party)
+- pandas            Data analysis (third-party)
+
+FILE OPERATIONS:
+
+READING FILES:
+  with open('file.txt', 'r') as f:
+      content = f.read()           # entire file as string
+      lines = f.readlines()        # list of lines
+      for line in f:               # iterate line by line
+
+WRITING FILES:
+  with open('file.txt', 'w') as f:
+      f.write("content")           # overwrites file
+  
+  with open('file.txt', 'a') as f:
+      f.write("content")           # appends to file
+
+FILE MODES:
+- 'r'   Read (default)
+- 'w'   Write (create/overwrite)
+- 'a'   Append
+- 'x'   Exclusive creation
+- 'b'   Binary
+- 't'   Text (default)
+- '+'   Read and write
+
+CONTEXT MANAGERS (with statement):
+- Automatically closes file even if error occurs
+- Syntax: with expression as variable:
+- Best practice for resource management
+
+DEBUGGING & PERFORMANCE:
+
+ASSERTIONS:
+- assert condition, "message"
+- Useful for testing assumptions
+- Can be disabled with -O flag
+
+DOCSTRINGS:
+- """ """  Multi-line documentation
+- Access via help() or __doc__
+- Conventions: one-line summary, blank line, detailed description
+
+DOCSTRING EXAMPLE:
+  def function(x):
+      """
+      One-line summary.
+      
+      Longer description if needed.
+      
+      Args:
+          x: Description of x
+      
+      Returns:
+          Description of return value
+      """
+      return x * 2
+
+PERFORMANCE:
+- Use list comprehension instead of loops where possible
+- Use generators for large datasets
+- Use built-in functions (they're optimized C code)
+- Profile code with timeit or cProfile modules
+- Avoid global variables in tight loops
+
+COMMON PATTERNS:
+
+SINGLETON PATTERN:
+  class Singleton:
+      _instance = None
+      
+      def __new__(cls):
+          if cls._instance is None:
+              cls._instance = super().__new__(cls)
+          return cls._instance
+
+FACTORY PATTERN:
+  class Factory:
+      @staticmethod
+      def create_object(obj_type):
+          if obj_type == 'A':
+              return ClassA()
+          elif obj_type == 'B':
+              return ClassB()
+
+CONTEXT MANAGER:
+  class MyContext:
+      def __enter__(self):
+          return self
+      
+      def __exit__(self, exc_type, exc_val, exc_tb):
+          pass
+
+BEST PRACTICES:
+
+NAMING & STYLE:
+- Follow PEP 8 style guide
+- Meaningful variable names
+- Functions: lowercase_with_underscores
+- Classes: CapitalizedWords
+- Constants: UPPER_CASE_WITH_UNDERSCORES
+- Private: prefix with underscore _private
+
+CODE ORGANIZATION:
+- Keep functions small and focused
+- DRY: Don't Repeat Yourself
+- SOLID principles for OOP
+- Maximum line length: 79 characters
+- Blank lines: separate functions and classes
+
+ERROR HANDLING:
+- Be specific with exception types
+- Don't catch bare exceptions
+- Use finally for cleanup
+- Provide helpful error messages
+- Log errors for debugging
+
+DOCUMENTATION:
+- Write docstrings for all functions/classes
+- Add type hints (Python 3.5+): def func(x: int) -> int:
+- Include examples in docstrings
+- Keep documentation up-to-date
+
+TESTING:
+- Write unit tests with unittest or pytest
+- Test edge cases and error conditions
+- Aim for high code coverage
+- Use fixtures for test setup
+- Mock external dependencies
+
+EXAMPLE TEST:
+  import unittest
+  
+  class TestFunction(unittest.TestCase):
+      def test_basic(self):
+          self.assertEqual(function(2), 4)
+      
+      def test_edge_case(self):
+          self.assertEqual(function(0), 0)
