@@ -241,3 +241,32 @@ EXAMPLES:
                               World
   print("Name:\tJohn")     => Name:	John
   print("Path: C:\\Users") => Path: C:\Users
+
+
+
+Boolean in Python: 
+ True and False
+
+ Truthy values: 
+
+
+ Falsy values: 
+ False, 0, [], {}, (), "", none
+
+NOTE: for falsy value: 
+class myclass():
+    def __len__(self):
+        return 0
+
+myobj = myclass()
+print(bool(myobj))   =>  False  (Nothe this will print false)
+
+
+*isinstance function : This evaluates & returns bool 
+
+x = 200;
+print(isinstance(x, int))  => True
+
+# Should be:
+x = 200
+print(isinstance(x, int))  # => True
