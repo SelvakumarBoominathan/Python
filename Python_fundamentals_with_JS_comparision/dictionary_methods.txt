@@ -1,0 +1,102 @@
+# Python Dictionary Methods and Built-in Functions
+
+# 1. dict.clear() - Remove all items
+# Return type: None
+d = {'a': 1, 'b': 2}
+d.clear()
+print(d)  # Output: {}
+
+# 2. dict.copy() - Shallow copy of dictionary
+# Return type: dict
+d1 = {'a': 1, 'b': 2}
+d2 = d1.copy()
+print(d2)  # Output: {'a': 1, 'b': 2}
+
+# 3. dict.fromkeys(keys, value=None) - Create dict from keys
+# Return type: dict
+d = dict.fromkeys(['a', 'b', 'c'], 0)
+print(d)  # Output: {'a': 0, 'b': 0, 'c': 0}
+
+# 4. dict.get(key, default=None) - Get value by key
+# Return type: any
+d = {'a': 1, 'b': 2}
+print(d.get('a'))  # Output: 1
+print(d.get('c', 'Not found'))  # Output: Not found
+
+# 5. dict.items() - Return key-value pairs
+# Return type: dict_items (view object)
+d = {'a': 1, 'b': 2}
+print(d.items())  # Output: dict_items([('a', 1), ('b', 2)])
+
+# 6. dict.keys() - Return all keys
+# Return type: dict_keys (view object)
+d = {'a': 1, 'b': 2}
+print(d.keys())  # Output: dict_keys(['a', 'b'])
+
+# 7. dict.values() - Return all values
+# Return type: dict_values (view object)
+d = {'a': 1, 'b': 2}
+print(d.values())  # Output: dict_values([1, 2])
+
+# 8. dict.pop(key, default=None) - Remove and return value
+# Return type: any
+d = {'a': 1, 'b': 2}
+print(d.pop('a'))  # Output: 1
+print(d)  # Output: {'b': 2}
+
+# 9. dict.popitem() - Remove and return last item (LIFO)
+# Return type: tuple
+d = {'a': 1, 'b': 2}
+print(d.popitem())  # Output: ('b', 2)
+
+# 10. dict.setdefault(key, default=None) - Get value or set if not exists
+# Return type: any
+d = {'a': 1}
+print(d.setdefault('a', 10))  # Output: 1
+print(d.setdefault('b', 2))  # Output: 2
+print(d)  # Output: {'a': 1, 'b': 2}
+
+# 11. dict.update(other) - Update with key-value pairs
+# Return type: None
+d1 = {'a': 1}
+d2 = {'b': 2, 'a': 10}
+d1.update(d2)
+print(d1)  # Output: {'a': 10, 'b': 2}
+
+# 12. len(dict) - Return number of items
+# Return type: int
+d = {'a': 1, 'b': 2}
+print(len(d))  # Output: 2
+
+# 13. dict(iterable) - Create dictionary from iterable
+# Return type: dict
+d = dict([('a', 1), ('b', 2)])
+print(d)  # Output: {'a': 1, 'b': 2}
+
+# 14. key in dict - Check if key exists
+# Return type: bool
+d = {'a': 1, 'b': 2}
+print('a' in d)  # Output: True
+print('c' in d)  # Output: False
+
+# 15. dict[key] - Access value (raises KeyError if not found)
+# Return type: any
+d = {'a': 1}
+print(d['a'])  # Output: 1
+
+# 16. dict[key] = value - Set value
+# Return type: None
+d = {}
+d['a'] = 1
+print(d)  # Output: {'a': 1}
+
+# 17. del dict[key] - Delete key
+# Return type: None
+d = {'a': 1, 'b': 2}
+del d['a']
+print(d)  # Output: {'b': 2}
+
+# 18. sorted(dict) - Sort keys
+# Return type: list
+d = {'c': 3, 'a': 1, 'b': 2}
+print(sorted(d))  # Output: ['a', 'b', 'c']
