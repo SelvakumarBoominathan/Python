@@ -1,0 +1,141 @@
+# Python Set Methods and Built-in Functions with Examples
+
+# 1. add(element) - Adds a single element to the set
+# Return type: None
+my_set = {1, 2, 3}
+my_set.add(4)
+print(my_set)  # {1, 2, 3, 4}
+
+# 2. remove(element) - Removes an element; raises KeyError if not found
+# Return type: None
+my_set.remove(4)
+print(my_set)  # {1, 2, 3}
+# my_set.remove(10)  # KeyError
+
+# 3. discard(element) - Removes an element; no error if not found
+# Return type: None
+my_set.discard(10)  # No error
+print(my_set)  # {1, 2, 3}
+
+# 4. pop() - Removes and returns an arbitrary element
+# Return type: element (raises KeyError if set is empty)
+element = my_set.pop()
+print(element, my_set)
+
+# 5. clear() - Removes all elements from the set
+# Return type: None
+temp_set = {1, 2, 3}
+temp_set.clear()
+print(temp_set)  # set()
+
+# 6. copy() - Creates a shallow copy of the set
+# Return type: new set
+set_a = {1, 2, 3}
+set_b = set_a.copy()
+print(set_b)  # {1, 2, 3}
+
+# 7. union(*others) or | - Returns union of sets
+# Return type: new set
+set_x = {1, 2, 3}
+set_y = {3, 4, 5}
+union_set = set_x.union(set_y)
+print(union_set)  # {1, 2, 3, 4, 5}
+union_set2 = set_x | set_y  # Same result
+
+# 8. update(*others) or |= - Updates set with union
+# Return type: None
+set_x.update(set_y)
+print(set_x)  # {1, 2, 3, 4, 5}
+
+# 9. intersection(*others) or & - Returns common elements
+# Return type: new set
+set_p = {1, 2, 3}
+set_q = {2, 3, 4}
+inter_set = set_p.intersection(set_q)
+print(inter_set)  # {2, 3}
+inter_set2 = set_p & set_q  # Same result
+
+# 10. intersection_update(*others) or &= - Updates set with intersection
+# Return type: None
+set_p.intersection_update(set_q)
+print(set_p)  # {2, 3}
+
+# 11. difference(*others) or - - Returns elements in first set but not others
+# Return type: new set
+set_m = {1, 2, 3}
+set_n = {2, 3, 4}
+diff_set = set_m.difference(set_n)
+print(diff_set)  # {1}
+diff_set2 = set_m - set_n  # Same result
+
+# 12. difference_update(*others) or -= - Updates set with difference
+# Return type: None
+set_m.difference_update(set_n)
+print(set_m)  # {1}
+
+# 13. symmetric_difference(other) or ^ - Returns elements in either set but not both
+# Return type: new set
+set_i = {1, 2, 3}
+set_j = {2, 3, 4}
+sym_diff = set_i.symmetric_difference(set_j)
+print(sym_diff)  # {1, 4}
+sym_diff2 = set_i ^ set_j  # Same result
+
+# 14. symmetric_difference_update(other) or ^= - Updates set with symmetric difference
+# Return type: None
+set_i.symmetric_difference_update(set_j)
+print(set_i)  # {1, 4}
+
+# 15. isdisjoint(other) - Checks if sets have no common elements
+# Return type: bool
+set_r = {1, 2}
+set_s = {3, 4}
+print(set_r.isdisjoint(set_s))  # True
+
+# 16. issubset(other) or <= - Checks if set is subset of other
+# Return type: bool
+set_t = {1, 2}
+set_u = {1, 2, 3}
+print(set_t.issubset(set_u))  # True
+print(set_t <= set_u)  # True
+
+# 17. issuperset(other) or >= - Checks if set is superset of other
+# Return type: bool
+print(set_u.issuperset(set_t))  # True
+print(set_u >= set_t)  # True
+
+# Built-in Functions:
+
+# len(set) - Returns number of elements
+# Return type: int
+my_set = {1, 2, 3, 4}
+print(len(my_set))  # 4
+
+# sum(set) - Returns sum of elements
+# Return type: int/float
+sum_result = sum({1, 2, 3})
+print(sum_result)  # 6
+
+# max(set) - Returns maximum element
+# Return type: element
+print(max({1, 2, 3}))  # 3
+
+# min(set) - Returns minimum element
+# Return type: element
+print(min({1, 2, 3}))  # 1
+
+# sorted(set) - Returns sorted list
+# Return type: list
+print(sorted({3, 1, 2}))  # [1, 2, 3]
+
+# any(set) - Returns True if any element is True
+# Return type: bool
+print(any({0, 1}))  # True
+
+# all(set) - Returns True if all elements are True
+# Return type: bool
+print(all({1, 2, 3}))  # True
+
+# set(iterable) - Creates a set from iterable
+# Return type: set
+print(set([1, 2, 2, 3]))  # {1, 2, 3}
