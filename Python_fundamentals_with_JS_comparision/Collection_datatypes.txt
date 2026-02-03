@@ -35,11 +35,11 @@ SET - Unordered, Mutable, No Duplicates
 ----------------------------------------
 colors = {"red", "blue", "green", "red"}
 colors.add("yellow")
-# Output: {"red", "blue", "green", "yellow"}  # Only 1 "red"
+# Output: {"red", "blue", "green", "yellow"}  # Only 1 "red". duplicates will be removed by default.
 
 DICT - Key-Value Pairs, Mutable, Unique Keys
 ---------------------------------------------
 student = {"name": "John", "age": 25, "grade": "A"}
 student["age"] = 26  # Can modify
-student["city"] = "NYC"  # Can add new key-value
+student["city"] = "NYC"  # Can add new key-value. but, we cannot use the same key word again (No duplicate keywords). 
 # Output: {"name": "John", "age": 26, "grade": "A", "city": "NYC"}
