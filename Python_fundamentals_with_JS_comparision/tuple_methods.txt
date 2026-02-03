@@ -1,4 +1,9 @@
-# Tuple Methods and Built-in Functions
+# Tuple Methods and Built-in Functions.
+
+
+# ===== BUILT-IN METHODS FOR TUPLE =====
+
+# Note: Tuples are immutable, so no methods like append(), remove(), etc.
 
 # 1. count() - Returns number of occurrences of a value
 # Return type: int
@@ -6,10 +11,14 @@ t = (1, 2, 2, 3, 2, 4)
 print(t.count(2))  # Output: 3
 
 # 2. index() - Returns index of first occurrence
-# Return type: int
+# Does NOT modify list | Returns: index (int)
 # Raises ValueError if not found
 t = ('a', 'b', 'c', 'b')
 print(t.index('b'))  # Output: 1
+
+
+# ===== BUILT-IN FUNCTIONS FOR TUPLE =====
+
 
 # 3. len() - Returns length of tuple
 # Return type: int
@@ -77,4 +86,3 @@ print(isinstance(t, tuple))  # Output: True
 # Return type: tuple
 print(tuple([1, 2, 3]))  # Output: (1, 2, 3)
 
-# Note: Tuples are immutable, so no methods like append(), remove(), etc.
