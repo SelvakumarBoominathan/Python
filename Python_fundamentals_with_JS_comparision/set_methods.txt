@@ -17,10 +17,15 @@ print(my_set)  # {1, 2, 3}
 my_set.discard(10)  # No error
 print(my_set)  # {1, 2, 3}
 
-# 4. pop() - Removes and returns an arbitrary element
+# 3. pop() - Removes and returns an arbitrary element
 # Return type: element (raises KeyError if set is empty)
 element = my_set.pop()
 print(element, my_set)
+
+# 4. discard(element) - Removes an element; no error if not found
+# Return type: None
+my_set.discard(10)  # No error
+print(my_set)  # {1, 2, 3}
 
 # 5. clear() - Removes all elements from the set
 # Return type: None
