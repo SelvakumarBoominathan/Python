@@ -7,7 +7,6 @@ print(f"Length of List is : {len(mylist)}")
 # list type
 print(f"Type of List is : {type(mylist)}")
 
-
 # list constructor
 print(
     f"List Constructor : {list(('apple', 'banana', 'cherry', 'orange', 'kiwi', 'melon', 'mango', 'grapes'))}")
@@ -29,7 +28,7 @@ if "banana" not in mylist:
 if "banana" in mylist:
     print("Yes, 'banana' is in the fruits list")
 
-
+# Methods to add items in list
 # Change range of List Items
 mylist[1:3] = ["blackcurrant", "watermelon"]
 print(f"Change range of List Items : {mylist}")
@@ -108,7 +107,6 @@ while i < len(fruits):
 # newlist will contain all items from mylist that have the letter "a" in them
 newlist = [x for x in mylist if "a" in x]
 print(f"List Comprehension : {newlist}")
-
 
 
 # Sort List
