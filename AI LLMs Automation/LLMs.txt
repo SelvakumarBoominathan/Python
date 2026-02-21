@@ -1,0 +1,33 @@
+# Understanding Large Language Models (LLMs)
+
+## Overview
+Think of LLMs as the computational 'brain' powering AI agents. You've probably heard of popular models like Grok, GPT series, Gemini, and open-source options such as Llama.
+
+## Core Architecture
+Every LLM relies on two key building blocks:
+- **Parameter File**: This stores all the learned weights from training (imagine Llama's 70 billion parameters as its "memory")
+- **Execution File**: The code that actually runs the model when you use it
+
+These models train on enormous datasets — Llama, for example, learns from roughly 10TB of text.
+
+## Training Pipeline
+Building an LLM involves three interconnected phases:
+
+1. **Pre-training**
+  - The model absorbs and compresses massive datasets into its parameters
+  - This phase demands serious GPU resources
+  
+2. **Fine-tuning**
+  - The model learns to align~ its responses with what humans actually want and need~
+  
+3. **Reinforcement Learning from Human Feedback (RLHF)**
+  - Humans evaluate responses, and the model improves through this iterative feedback loop
+
+## Context Windows & Tokens
+- **Tokens**: How the model breaks down text into digestible pieces (think of them as the model's "words," though they're more granular)
+- **Context Window**: How much information the model can hold in its "working memory" at once
+- **Range**: From 4,000 tokens (good for quick tasks) up to 128,000+ tokens (ideal for analyzing entire documents)
+- Bigger context windows? Better at handling lengthy documents and nuanced problems.
+
+## Prompt Engineering
+Here's the bottom line: *the better your instructions, the better your results*. Crafting clear, thoughtful prompts is your secret weapon for getting the most out of LLMs.
