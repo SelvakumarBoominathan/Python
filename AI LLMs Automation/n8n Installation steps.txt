@@ -1,0 +1,8 @@
+Download node.js
+Install node js
+install npm
+install nvm (If you want to control nvm)
+cmd -> npm -v
+node cmd -> npm i n8n -g
+update n8n -> npm update -g n8n
+node cmd -> n8n start
