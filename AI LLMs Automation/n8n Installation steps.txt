@@ -6,3 +6,8 @@ cmd -> npm -v
 node cmd -> npm i n8n -g
 update n8n -> npm update -g n8n
 node cmd -> n8n start
+
+
+for updating n8n:
+n8n start
+npm update -g n8n
