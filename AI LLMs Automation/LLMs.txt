@@ -18,7 +18,7 @@ Building an LLM involves three interconnected phases:
   - This phase demands serious GPU resources
   
 2. **Fine-tuning**
-  - The model learns to align~ its responses with what humans actually want and need~
+  - The model learns to align~ its responses with what humans actually want and need
   
 3. **Reinforcement Learning from Human Feedback (RLHF)**
   - Humans evaluate responses, and the model improves through this iterative feedback loop
