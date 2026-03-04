@@ -1,0 +1,95 @@
+PANDAS - PYTHON DATA ANALYSIS LIBRARY
+
+Overview:
+- Built on top of NumPy
+- Used for data analysis, data science, and machine learning
+- Enables import, display, manipulation, and export of data
+- Core data structures: Series and DataFrames
+
+Installation:
+pip install pandas
+# For multiple Python versions:
+python -m pip install pandas
+
+Importing Pandas:
+import pandas as pd
+pd.__version__  # Check version
+
+
+DATA STRUCTURES
+
+Series: One-dimensional labeled array
+- Similar to an Excel column
+- Contains index and values
+
+DataFrame: Two-dimensional labeled table
+- Similar to an Excel spreadsheet table
+- Contains rows and columns
+
+
+CREATING A SERIES
+
+data = [1, 2, 3, 109, 1826]
+series = pd.Series(data)  # Constructor (capital S)
+
+# With custom index:
+series = pd.Series(data, index=['a', 'b', 'c', 'd', 'e'])
+
+Data Types (dtype):
+- int64: All integers
+- float64: All floats
+- bool: All booleans
+- object: Strings or mixed types
+
+
+ACCESSING VALUES
+
+loc (label-based indexing):
+my_series.loc['c']  # Access by index label
+my_series.loc['c'] = 1000  # Modify by label
+
+iloc (integer-position indexing):
+my_series.iloc[1]  # Access by position (0-based)
+my_series.iloc[1] = 100  # Modify by position
+
+Filtering:
+my_series[my_series >= 40]  # Boolean indexing -> will return if the condition pass
+
+
+CREATING A DATAFRAME
+
+df = pd.DataFrame({'col1': [1, 2, 3], 'col2': ['a', 'b', 'c']})
+
+Accessing columns:
+df['col1']  # Series
+df[['col1', 'col2']]  # Multiple columns
+
+Accessing rows:
+df.loc[0]  # By label
+df.iloc[0]  # By position
+
+
+COMMON OPERATIONS
+
+df.head()  # First 5 rows
+df.tail()  # Last 5 rows
+df.info()  # Column info
+df.describe()  # Summary statistics
+df.shape  # Dimensions (rows, columns)
+df.columns  # Column names
+df.index  # Row labels
+
+Data cleaning:
+df.dropna()  # Remove missing values
+df.fillna(value)  # Fill missing values
+df.drop_duplicates()  # Remove duplicates
+
+Sorting and grouping:
+df.sort_values('col1')  # Sort by column
+df.groupby('col1').sum()  # Group and aggregate
+
+Reading/Writing files:
+pd.read_csv('file.csv')
+pd.read_excel('file.xlsx')
+df.to_csv('output.csv')
+df.to_excel('output.xlsx')
