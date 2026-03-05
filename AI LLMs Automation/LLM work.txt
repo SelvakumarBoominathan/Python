@@ -1,0 +1,67 @@
+  1. LLMs Generate Probabilistically
+    - LLMs don't "know" answers; they predict the next word based on patterns
+    - Example: Given "The sky is...", it predicts "blue" with 85% confidence, "green" with 10%, etc.
+    - It picks the highest probability word
+
+  2. Text Processing via Tokens
+    - Text is broken into chunks called "tokens" (words or sub-words)
+    - Example: "Hello" → ["Hello"], "Beautiful" → ["Beau", "ti", "ful"]
+    - Reason: Saves memory and handles rare words better
+
+  3. Tokenization (Preprocessing Step)
+    - Happens BEFORE the model processes text
+    - Example: "Hello, world!" → ["Hello", ",", "world", "!"]
+    - The model never sees raw text; only tokens
+
+  4. Token Splitting into Subwords
+    - Rare/long words split into smaller parts
+    - Example: "Unhappy" → ["Un", "happy"]
+    - Punctuation gets its own token: "!" is one token
+
+  5. Vectorization (Convert Tokens to Numbers)
+    - Each token becomes a list of numbers (vector)
+    - Example: "cat" → [0.5, -0.2, 0.8, 0.1]
+    - These numbers capture the "meaning" of the word
+
+  6. Embeddings (Placement in Vector Space)
+    - Vectors are placed in multi-dimensional space (like a 3D graph, but 768+ dimensions)
+    - Related words cluster together naturally
+
+  7. Semantic Embeddings (Meaning-Based Placement)
+    - Similar words are close; different words are far apart
+    - Example: "Python" (language) near "Java"; far from "Python" (snake)
+    - The model learns this from training data
+
+  8. Vector Dimensions
+    - More dimensions = richer representation
+    - Example: GPT-3 uses 12,288 dimensions
+    - Think of it like more descriptive features per word
+
+  9. Sequence Matrix
+    - Sentence "I like apples" becomes a table:
+      Token    Vector
+      "I"    → [0.2, -0.1, 0.7, 0.3]
+      "like" → [0.5,  0.2, -0.1, 0.8]
+      "apples"→ [0.1,  0.9,  0.4, 0.2]
+
+  10. Attention Mechanism (Understanding Context)
+     - Identifies which words relate to each other
+     - Example: "She went to the store. She bought milk."
+     - Attention links "She" (second mention) to "She" (first mention)
+     - Multiple attention heads spot different patterns (grammar, meaning, etc.)
+
+  11. Decoding Strategies
+     a) Temperature (Controls Creativity)
+       - 0.3: Deterministic (picking only safe answers)
+       - 0.7: Balanced randomness
+       - 1.5: Very creative (more hallucinations)
+     
+     b) Top-p Sampling (Quality Control)
+       - If top 90% probable tokens cover "dog", "cat", "bird"
+       - Ignores the 10% unlikely tokens like "refrigerator"
+       - Reduces weird, nonsensical outputs
+
+  12. Why Inference is Slow
+     - Generating 100 words takes ~10,000 operations (n²)
+     - Each new word depends on all previous words
+     - Example: Generating a 1000-word essay is 1,000,000+ operations

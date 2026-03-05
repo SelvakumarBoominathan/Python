@@ -1,4 +1,5 @@
 PANDAS - PYTHON DATA ANALYSIS LIBRARY
+Pandas - Panel Data
 
 Overview:
 - Built on top of NumPy
