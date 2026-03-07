@@ -1,6 +1,5 @@
 import pandas as pd
 
-#data_csv = pd.read_csv("Pandas\Employee_details.csv")
-data_json = pd.read_json("Pandas\Employee_details2.json")
+my_file = pd.read_json("Pandas\Employee_details2.json", orient="records")
 
-print(data_json)
+print(my_file)
