@@ -1,0 +1,14 @@
+Note:
+
+SQL Syntax can be used to any relational SQL Type of DBs EG: PostGreSQL, MySQL ect.
+It is not good practice to always select All using Asterisk "*" unless we want. Because it enable querying all data in your DB slows down the application by increasing the traffic. 
+
+To Improve Readability: 
+
+Just Capitalize all keyword and use semicolen in end.
+
+COUNT() : 
+
+Use the COUNT() to wrap the returned items. so that i will return the count of returned value.
+
+The WHERE clause appears immediately after the SELECt statement. because WHERE is used to filter the rows returned from SELECT Statement.

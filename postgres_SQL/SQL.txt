@@ -82,3 +82,16 @@ Ecommerce, banking, social media uses distributed databases.
 
 
 One sentence Explaination :  Databases store billions of records because the data lives on large disk storage systems, while RAM is only used as a high-speed cache for active data.
+
+
+
+Note: SQL Syntax can be used to any relational SQL Type of DBs EG: PostGreSQL, MySQL ect.
+
+
+SELECT Statement:
+
+SELECT * FROM {tablename}
+SELECT {Col_name} FROM {tablename}
+
+
+Note: It is not good practice to always select All using Asterisk "*" unless we want.
