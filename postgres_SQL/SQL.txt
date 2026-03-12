@@ -1,3 +1,84 @@
 SQL is a programming language
 Postgrey, mySQL, SQLite ect these are databases. 
 SQL can be used in hive (runs top of hadoop)
+
+
+
+Installation:
+
+Install postgrey SQL : It is a SQL Engine, stores data, read queries, return information.
+Install pgAdmin - Graphical UI for connecting with Postgrey SQL.
+
+
+
+Why Use Databases?
+
+Databases store billions of records on storage devices like SSDs, hard drives, and disks. PostgreSQL, MongoDB, and MySQL are similar to Excel spreadsheets, but much more powerful.
+
+Why not use Excel?
+- Excel works well for small datasets (less than 100,000 rows)
+- Excel becomes slow and crashes with larger data (millions or billions of rows)
+
+Why use Databases?
+- Handle massive amounts of data efficiently
+- Retrieve data much faster than Excel
+- Organize and arrange data in structured ways
+- Support multiple users accessing data simultaneously
+- Provide better security and data protection
+
+So if a database contains 3 billion rows, they are stored as files on disk, similar to how Excel files exist on disk.
+
+EG structure of Database servers:
+
+database_server
+   ├── users_table.data
+   ├── orders_table.data
+   ├── indexes
+   └── transaction_logs
+
+
+DBs use RAM(memory) used as a cache
+
+
+
+############ Caching #########
+
+Databases use RAM mainly for caching frequently accessed data.
+
+Application request
+       ↓
+Database checks RAM cache
+       ↓
+If found → return instantly
+If not → read from disk → load into RAM
+
+
+if system configuration is as below
+RAM: 64 GB
+Disk storage: 10 TB
+Database size: 4 TB
+
+The 4 TB database is mostly on disk.
+
+But:
+frequently used rows, indexes, query results are cached in RAM for speed.
+
+
+
+################    Data Is Often Distributed Across Multiple Machines     ##################
+
+
+Large systems rarely use just one server. Instead they use clusters.
+
+Ecommerce, banking, social media uses distributed databases. 
+
+
+################    Simple Excel Comparison     ##################
+
+| Tool     | Storage                                  |
+| -------- | ---------------------------------------- |
+| Excel    | file on your laptop                      |
+| Database | managed data files on large server disks |
+
+
+One sentence Explaination :  Databases store billions of records because the data lives on large disk storage systems, while RAM is only used as a high-speed cache for active data.
