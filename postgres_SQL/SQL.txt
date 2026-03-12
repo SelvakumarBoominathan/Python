@@ -1,0 +1,3 @@
+SQL is a programming language
+Postgrey, mySQL, SQLite ect these are databases. 
+SQL can be used in hive (runs top of hadoop)

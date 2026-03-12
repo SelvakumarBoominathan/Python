@@ -29,7 +29,6 @@ def process_items(items_t: tuple[int, int, str], items_s: set[bytes]):
     return items_t, items_s
 
 
-
 # we can also use a dictionary to specify the types of keys and values in a dictionary. For example, we can use a dictionary to specify that the keys are strings and the values are floats.
 
 
@@ -37,3 +36,34 @@ def process_items(prices: dict[str, float]):
     for item_name, item_price in prices.items():
         print(item_name)
         print(item_price)
+
+
+# Union Types:
+
+# You can declare that a variable can be any of several types, for example, an int or a str.
+
+# To define it you use the vertical bar (|) to separate both types. This means that item could be an int or a str.
+
+def process_item(item: int | str):
+    print(item)
+
+# You can declare that a value could have a type, like str, but that it could also be None. This is useful for optional parameters in functions, where the parameter can be either a specific type or None if it is not provided.
+
+# Using str | None instead of just str will let the editor help you detect errors where you could be assuming that a value is always a str, when it could actually be None too.
+
+
+def say_hi(name: str | None = None):
+    if name is not None:
+        print(f"Hey {name}!")
+    else:
+        print("Hello World")
+
+
+# Classes as types
+
+class Person:
+    def __init__(self, name: str):
+        self.name = name
+
+def get_person_name(one_person: Person):
+    return one_person.name
