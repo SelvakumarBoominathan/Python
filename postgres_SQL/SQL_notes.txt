@@ -11,4 +11,9 @@ COUNT() :
 
 Use the COUNT() to wrap the returned items. so that i will return the count of returned value.
 
-The WHERE clause appears immediately after the SELECt statement. because WHERE is used to filter the rows returned from SELECT Statement.
+The WHERE clause appears immediately after the SELECt statement. because WHERE is used to filter the rows returned from SELECT Statement. WHERE Clause is used to apply conditions in filterig the data from table. We can use multiple conditiona using operators like AND, OR  ect.
+
+
+Sample Code to use WHERE clause:
+SELECT * FROM film
+WHERE rental_rate > 4 AND replacement_cost >= 19.99;
