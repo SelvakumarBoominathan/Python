@@ -1,88 +1,79 @@
-Note:
+SQL Notes
 
-SQL Syntax can be used to any relational SQL Type of DBs EG: PostGreSQL, MySQL ect.
-It is not good practice to always select All using Asterisk "*" unless we want. Because it enable querying all data in your DB slows down the application by increasing the traffic. 
+General Guidelines:
+-------------------
+- SQL syntax is generally applicable to all relational databases (e.g., PostgreSQL, MySQL, etc.).
+- Avoid using SELECT * unless you need all columns. Selecting all columns can slow down your application and increase network traffic.
+- Capitalize all SQL keywords for readability. End each statement with a semicolon (;).
+- Use lowercase for table and column names to distinguish them from SQL keywords.
+- Avoid using SQL reserved keywords as table or column names. If unavoidable, use double quotes (e.g., "length") but it's better to choose different names.
 
-To Improve Readability: 
+COUNT():
+--------
+- Use COUNT() to return the number of rows matching a query.
+- Example: SELECT COUNT(*) FROM table_name;
 
-Just Capitalize all keyword and use semicolen in end.
+String Literals:
+----------------
+- Use single quotes for string values in SQL.
+- Example: WHERE rating = 'R'
 
-COUNT() : 
+ORDER BY:
+---------
+- Use ORDER BY to sort results by one or more columns.
+- You can specify ASC (ascending, default) or DESC (descending).
+- You do not have to select the column you sort by, but including it improves clarity.
+- Example: SELECT title FROM film ORDER BY length DESC;
 
-Use the COUNT() to wrap the returned items. so that i will return the count of returned value.
-
-Use single Quote to define any string in SQl Query. EG: WHERE rating = 'R'
-
-ORDER BY : we can use sorting to induvidual columns ASC and DESC. Also it is not needed to select the column we sort in the query. Byt it is a good ptractive and visibily good how query is used. 
-
-LIMIT: 
-
-Limit goes end of the query and It is the last command to be executed. used to return the limited rows and columns.
-
-Syntax:
-LIMIT number_of_rows
-
-Note: Try to avoid using the SQL keyword as table column name. pgAdmin will intimate this to us.
-The Query will work fine bt better to avoid. pg Admin will highlight this. try write keywords in capital letter and col, table ect names in small letters. This will help us distinguish the keywords from names.
-
-EG: 
-
-SELECT title, length FROM film;   (hete length is a keyword of SQL already. note the cases used to differentiate the keywords with col names)
+LIMIT:
+------
+- LIMIT restricts the number of rows returned.
+- Syntax: LIMIT number_of_rows
+- LIMIT is placed at the end of the query.
+- Example: SELECT * FROM table_name LIMIT 10;
 
 BETWEEN & NOT BETWEEN:
-
-To use it with date we need to first have the dates in ISO 8601 format ie YYYY-MM-DD.  (2026-03-15). We should be carefull while using BETWEEN with dates. Read a lot about this.
-
+----------------------
+- Use BETWEEN to filter results within a range (inclusive).
+- For dates, use ISO 8601 format (YYYY-MM-DD).
+- Example: WHERE date BETWEEN '2023-01-01' AND '2023-12-31'
+- Be cautious with date ranges; check database documentation for inclusivity.
 
 IN & NOT IN:
-
-SELECT color FROM table
-WHERE color IN ('red','blue','green')
-
-or 
-
-WHERE color NOT IN ('red','blue','green')
-
-The above query will return rows that matches the condition of color in red, blue and green.
-
-
-
-
-
+------------
+- Use IN to match any value in a list.
+- Example: WHERE color IN ('red', 'blue', 'green')
+- Use NOT IN to exclude values.
+- Example: WHERE color NOT IN ('red', 'blue', 'green')
 
 LIKE & ILIKE:
+-------------
+- LIKE is used for pattern matching (case-sensitive).
+- ILIKE is used for case-insensitive pattern matching (PostgreSQL only).
+- % matches any sequence of characters.
+- _ matches a single character.
+- Examples:
+  - WHERE name LIKE 'A%'      -- names starting with 'A'
+  - WHERE name LIKE '%a'      -- names ending with 'a'
+  - WHERE last_name LIKE '%eh%'   -- contains 'eh'
+  - WHERE last_name LIKE '_eh%'   -- second and third letters are 'eh'
+  - WHERE first_name NOT LIKE '%her%' -- does not contain 'her'
+- Combine % and _ for flexible patterns.
+- Note: LIKE is case-sensitive in most databases; use ILIKE for case-insensitive search in PostgreSQL.
 
-LIKE Character allows us to perform pattern matching against string data. identify strings that matches sequence of characters using "%" and single character in a string using "_".
+Best Practices:
+---------------
+- Always use clear and descriptive names for tables and columns.
+- Use comments (--) to explain complex queries.
+- Test queries with sample data to ensure correctness, especially with edge cases.
+- Be mindful of NULL values; use IS NULL or IS NOT NULL for checks.
+- Use parameterized queries in applications to prevent SQL injection.
 
-EG: 
-All names that begin with an "A":
-WHERE name LIKE "A%"   -> here the "%" is used to represent the sequence pattern. meaning here is name starts with "A%". we placed % followed by "A".
+Additional Tips:
+----------------
+- Use DISTINCT to remove duplicate rows: SELECT DISTINCT column FROM table;
+- Use GROUP BY to aggregate data: SELECT column, COUNT(*) FROM table GROUP BY column;
+- Use JOINs to combine data from multiple tables.
+- Use EXPLAIN to analyze query performance.
 
-All names that ends with an "a":
-WHERE name LIKE "%a"
-
-ILIKE -> Not a case sensitive
-LIKE  -> Case sensitive
-
-Other scenarios:
-WHERE last_name LIKE '%eh%'  -> lastname contains 'eh' in the middle. % at start and end covers all the other characters at both sides.
-
-WHERE last_name LIKE '_eh%'   -> underscore denotes number of characters. in the eg one _ means one character at the beginning and % means rest all characters.
-
-LIKE and I LIKE with '_' and '%' is a best patter combination.
-
-NOTE: WHERE first_name LIKE '%her%'    will check 'her' opresent in all places. since we added % at both ends it does not mean return firstnames that has 'her' at the middle.
-
-We can also use NOt with LIKE or ILIKE as follows : WHERE first_name NOT LIKE '%her%'
-
-NOTE: '%" is for long sequence of characters and '_' is for single characters.
-
-
-
-
-
-
-
-
-
-
+These notes cover essential SQL concepts and best practices. Review them regularly to reinforce your understanding and prepare for interviews.
