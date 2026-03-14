@@ -34,4 +34,55 @@ BETWEEN & NOT BETWEEN:
 To use it with date we need to first have the dates in ISO 8601 format ie YYYY-MM-DD.  (2026-03-15). We should be carefull while using BETWEEN with dates. Read a lot about this.
 
 
+IN & NOT IN:
+
+SELECT color FROM table
+WHERE color IN ('red','blue','green')
+
+or 
+
+WHERE color NOT IN ('red','blue','green')
+
+The above query will return rows that matches the condition of color in red, blue and green.
+
+
+
+
+
+
+LIKE & ILIKE:
+
+LIKE Character allows us to perform pattern matching against string data. identify strings that matches sequence of characters using "%" and single character in a string using "_".
+
+EG: 
+All names that begin with an "A":
+WHERE name LIKE "A%"   -> here the "%" is used to represent the sequence pattern. meaning here is name starts with "A%". we placed % followed by "A".
+
+All names that ends with an "a":
+WHERE name LIKE "%a"
+
+ILIKE -> Not a case sensitive
+LIKE  -> Case sensitive
+
+Other scenarios:
+WHERE last_name LIKE '%eh%'  -> lastname contains 'eh' in the middle. % at start and end covers all the other characters at both sides.
+
+WHERE last_name LIKE '_eh%'   -> underscore denotes number of characters. in the eg one _ means one character at the beginning and % means rest all characters.
+
+LIKE and I LIKE with '_' and '%' is a best patter combination.
+
+NOTE: WHERE first_name LIKE '%her%'    will check 'her' opresent in all places. since we added % at both ends it does not mean return firstnames that has 'her' at the middle.
+
+We can also use NOt with LIKE or ILIKE as follows : WHERE first_name NOT LIKE '%her%'
+
+NOTE: '%" is for long sequence of characters and '_' is for single characters.
+
+
+
+
+
+
+
+
+
 
