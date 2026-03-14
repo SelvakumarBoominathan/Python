@@ -11,9 +11,27 @@ COUNT() :
 
 Use the COUNT() to wrap the returned items. so that i will return the count of returned value.
 
-The WHERE clause appears immediately after the SELECt statement. because WHERE is used to filter the rows returned from SELECT Statement. WHERE Clause is used to apply conditions in filterig the data from table. We can use multiple conditiona using operators like AND, OR  ect.
+Use single Quote to define any string in SQl Query. EG: WHERE rating = 'R'
+
+ORDER BY : we can use sorting to induvidual columns ASC and DESC. Also it is not needed to select the column we sort in the query. Byt it is a good ptractive and visibily good how query is used. 
+
+LIMIT: 
+
+Limit goes end of the query and It is the last command to be executed. used to return the limited rows and columns.
+
+Syntax:
+LIMIT number_of_rows
+
+Note: Try to avoid using the SQL keyword as table column name. pgAdmin will intimate this to us.
+The Query will work fine bt better to avoid. pg Admin will highlight this. try write keywords in capital letter and col, table ect names in small letters. This will help us distinguish the keywords from names.
+
+EG: 
+
+SELECT title, length FROM film;   (hete length is a keyword of SQL already. note the cases used to differentiate the keywords with col names)
+
+BETWEEN & NOT BETWEEN:
+
+To use it with date we need to first have the dates in ISO 8601 format ie YYYY-MM-DD.  (2026-03-15). We should be carefull while using BETWEEN with dates. Read a lot about this.
 
 
-Sample Code to use WHERE clause:
-SELECT * FROM film
-WHERE rental_rate > 4 AND replacement_cost >= 19.99;
+

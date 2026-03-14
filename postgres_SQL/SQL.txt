@@ -95,3 +95,43 @@ SELECT {Col_name} FROM {tablename}
 
 
 Note: It is not good practice to always select All using Asterisk "*" unless we want.
+
+
+The WHERE clause appears immediately after the SELECt statement. because WHERE is used to filter the rows returned from SELECT Statement. WHERE Clause is used to apply conditions in filterig the data from table. We can use multiple conditiona using operators like AND, OR  ect.
+
+
+Sample Code to use WHERE clause:
+SELECT * FROM film
+WHERE rental_rate > 4 AND replacement_cost >= 19.99;
+
+
+ORDER BY: by default ascending order 
+
+It is used to sort the column by ASC / DESC. For string based col sorting based on alphabet for number based columns number based sorting.
+
+Syntax:
+SELECT column_1, column_2
+FROM table_name
+ORDER BY column_1, column_2 ASC / DESC;
+
+or we can use sorting to induvidual columns as see below.
+
+ORDER BY column_1  ASC, column_2 DESC;
+
+
+LIMIT: 
+
+Limit goes end of the query and It is the last command to be executed. used to return the limited rows and columns.
+
+Syntax:
+LIMIT number_of_rows
+
+BETWEEN & NOT BETWEEN:
+
+value between any two values (low & high), NOT is an opposite. It can be used with dates. To use it with date we need to first have the dates in ISO 8601 format ie YYYY-MM-DD.  (2026-03-15)
+
+EG : Query
+SELECT COUNT(*) FROM payment
+WHERE amount NOT BETWEEN 8 AND 9
+
+
