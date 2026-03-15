@@ -77,3 +77,113 @@ Additional Tips:
 - Use EXPLAIN to analyze query performance.
 
 These notes cover essential SQL concepts and best practices. Review them regularly to reinforce your understanding and prepare for interviews.
+
+
+
+
+Aggregate Functions:
+--------------------
+- Aggregate functions process multiple input values and return a single output value.
+- They are used only in the SELECT or HAVING clauses.
+
+Common aggregate functions:
+- AVG(): Returns the average (mean) value. Returns a float, often with many decimal places. Use ROUND() to limit decimals.
+- COUNT(): Returns the number of values (rows).
+- MAX(): Returns the maximum value.
+- MIN(): Returns the minimum value.
+- SUM(): Returns the sum of all values.
+
+Example:
+SELECT AVG(salary) FROM employees;
+SELECT COUNT(*) FROM orders;
+SELECT MAX(price) FROM products;
+SELECT MIN(age) FROM users;
+SELECT SUM(amount) FROM payments;
+
+GROUP BY:
+---------
+- GROUP BY is used to group rows that have the same values in specified columns, often used with aggregate functions.
+- You can group by one or more columns.
+- Every column in the SELECT list that is not an aggregate must be included in the GROUP BY clause.
+
+Example:
+SELECT company, division, SUM(sales)
+FROM finance_table
+GROUP BY company, division;
+
+- If you select a column without aggregation and do not include it in GROUP BY, you will get an error.
+
+Incorrect:
+SELECT company, division, SUM(sales) FROM finance_table; -- Error: division must appear in the GROUP BY clause
+
+- You can use multiple columns for grouping.
+
+Filtering Aggregated Results:
+-----------------------------
+- Use WHERE to filter rows before aggregation.
+- Use HAVING to filter groups after aggregation.
+
+Example:
+SELECT company, SUM(sales)
+FROM finance_table
+WHERE division IN ('marketing', 'transport')
+GROUP BY company
+HAVING SUM(sales) > 10000;
+
+ORDER BY with Aggregates:
+-------------------------
+- To sort by an aggregate result, reference the entire aggregate function in ORDER BY.
+
+Example:
+SELECT company, SUM(sales)
+FROM finance_table
+GROUP BY company
+ORDER BY SUM(sales) DESC
+LIMIT 5;
+
+Dates in GROUP BY:
+------------------
+- To group by date (ignoring time), use a date function to extract the date part from a timestamp.
+
+Example:
+SELECT DATE(payment_date) AS pay_date, SUM(amount)
+FROM payment
+GROUP BY DATE(payment_date)
+ORDER BY SUM(amount) DESC;
+
+HAVING
+:
+------
+- HAVING is used to filter groups created by GROUP BY based on aggregate conditions.
+- WHERE filters rows before grouping; HAVING filters after aggregation.
+- Use HAVING with aggregate functions (e.g., SUM(), COUNT(), AVG()) to restrict which groups appear in the result.
+
+Examples:
+- Find departments with more than 10 employees:
+  SELECT department, COUNT(*) 
+  FROM employees 
+  GROUP BY department 
+  HAVING COUNT(*) > 10;   -> Note Having comes after GROUP BY clause
+
+- Show products with total sales over $1000:
+  SELECT product_id, SUM(sales) 
+  FROM orders 
+  GROUP BY product_id 
+  HAVING SUM(sales) > 1000;
+
+- Honoring customers : Customer iDs that has 40 or more transactions would get platinum batch:
+  SELECT customer_id, COUNT(payment_id) FROM payment
+  GROUP BY customer_id
+  HAVING COUNT(payment_id) >= 40
+
+- Customer_ids who spent more than 100$ in payment with our staff_id member 2:
+  SELECT customer_id, SUM(amount) FROM payment
+  WHERE staff_id = 2
+  GROUP BY customer_id
+  HAVING SUM(amount) > 100
+
+
+Notes:
+- You cannot use column aliases defined in SELECT in the HAVING clause in some databases; use the full aggregate expression.
+- HAVING can be used without GROUP BY to filter on aggregates over the entire result set.
+
