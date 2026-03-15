@@ -187,3 +187,36 @@ Notes:
 - You cannot use column aliases defined in SELECT in the HAVING clause in some databases; use the full aggregate expression.
 - HAVING can be used without GROUP BY to filter on aggregates over the entire result set.
 
+
+ASSESSMENTS : 
+
+1. Return Customer IDs who spent atleast 110$ with the staff member ID 2
+
+SELECT customer_id, SUM(amount) FROM payment
+WHERE staff_id = 2
+GROUP BY customer_id
+HAVING SUM(amount) >= 110
+
+ANS : Customer_id = 187, 148
+
+
+2. How many films begin with letter J:
+
+  SELECT COUNT(*) FROM film
+  WHERE title LIKE 'J%'
+
+ANS: 20
+
+3. What customer_id has the highiest customer ID number whose name starts with an 'E' and has an address ID lower than 500?
+
+  SELECT first_name, last_name FROM customer
+  WHERE first_name LIKE 'E%' AND address_id < 500
+  ORDER BY customer_id DESC
+  LIMIT 1
+
+ANS: Eddie Tomlin
+
+
+
+
+

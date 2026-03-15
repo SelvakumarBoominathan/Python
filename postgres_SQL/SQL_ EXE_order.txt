@@ -1,0 +1,14 @@
+| Order | Clause                    | Purpose                 |
+| ----- | ------------------------- | ----------------------- |
+| 1     | `FROM`                    | Identify source tables  |
+| 2     | `JOIN` / `ON`             | Combine tables          |
+| 3     | `WHERE`                   | Filter rows             |
+| 4     | `GROUP BY`                | Create groups           |
+| 5     | `WITH ROLLUP` / `CUBE`    | Generate grouping sets  |
+| 6     | `HAVING`                  | Filter groups           |
+| 7     | `SELECT`                  | Choose columns          |
+| 8     | `DISTINCT`                | Remove duplicates       |
+| 9     | `WINDOW` / `OVER`         | Apply window functions  |
+| 10    | `ORDER BY`                | Sort result             |
+| 11    | `OFFSET`                  | Skip rows               |
+| 12    | `LIMIT` / `FETCH` / `TOP` | Restrict number of rows |
