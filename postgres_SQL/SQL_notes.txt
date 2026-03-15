@@ -188,49 +188,79 @@ Notes:
 - HAVING can be used without GROUP BY to filter on aggregates over the entire result set.
 
 
-ASSESSMENTS : 
+ASSESSMENTS:
+------------
 
-1. Return Customer IDs who spent atleast 110$ with the staff member ID 2
+1. Return Customer IDs who spent at least $110 with staff member ID 2:
 
-SELECT customer_id, SUM(amount) FROM payment
+Example:
+SELECT customer_id, SUM(amount)
+FROM payment
 WHERE staff_id = 2
 GROUP BY customer_id
-HAVING SUM(amount) >= 110
+HAVING SUM(amount) >= 110;
 
-ANS : Customer_id = 187, 148
+-- This query groups payments by customer for staff member 2 and returns those with a total amount of $110 or more.
+
+Sample Answer: customer_id = 187, 148
+
+2. How many films begin with the letter 'J'?
+
+Example:
+SELECT COUNT(*)
+FROM film
+WHERE title LIKE 'J%';
+
+-- This counts all films where the title starts with 'J'.
+
+Sample Answer: 20
+
+3. Which customer has the highest customer_id whose first name starts with 'E' and address_id is less than 500?
+
+Example:
+SELECT customer_id, first_name, last_name
+FROM customer
+WHERE first_name LIKE 'E%' AND address_id < 500
+ORDER BY customer_id DESC
+LIMIT 1;
+
+-- This finds the customer with the highest customer_id meeting the criteria.
+
+Sample Answer: customer_id = (e.g., 499), Name: Eddie Tomlin
 
 
-2. How many films begin with letter J:
 
-  SELECT COUNT(*) FROM film
-  WHERE title LIKE 'J%'
 
-ANS: 20
+AS Clause (Column Aliasing):
+----------------------------
 
-3. What customer_id has the highiest customer ID number whose name starts with an 'E' and has an address ID lower than 500?
-
-  SELECT first_name, last_name FROM customer
-  WHERE first_name LIKE 'E%' AND address_id < 500
-  ORDER BY customer_id DESC
-  LIMIT 1
-
-ANS: Eddie Tomlin
-
-AS Clause:
-
-It is used to remname the column and results.
+- The AS keyword is used to rename columns or expressions in the result set for clarity.
+- Aliases are useful for readability, especially for aggregated columns or calculated fields.
 
 Syntax:
+SELECT column_name AS alias_name
+FROM table_name;
 
-SELECt col_name AS new_name FROM table
+Examples:
+- Rename a column:
+  SELECT customer_id AS cus_id
+  FROM customer;
 
-We can name a column or name a aggregation result ect.
+  -- The result will show 'cus_id' as the column header.
 
-SELECT customer_id AS cus_ID FROM customer
+- Rename an aggregate result:
+  SELECT customer_id, SUM(amount) AS total_spent
+  FROM payment
+  GROUP BY customer_id;
 
-ANS: cus_id col name will be returned. note the col name in small letters. (because cap letter denotes keyword in SQL)
+  -- The result will show 'total_spent' as the column header for the sum.
 
-NOTE: AS operator executed at the end of the query, we cannot use the ALIAS names created using AS keyword with WHERE in the query.
+Notes:
+- Aliases created with AS are only available in the SELECT and ORDER BY clauses, not in WHERE or GROUP BY.
+- The AS keyword is optional; you can also write: SELECT customer_id cus_id FROM customer;
+- Use double quotes for aliases with spaces or special characters: SELECT column AS "Alias Name"
+
+
 
 
 
