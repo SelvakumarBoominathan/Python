@@ -261,6 +261,43 @@ Notes:
 - Use double quotes for aliases with spaces or special characters: SELECT column AS "Alias Name"
 
 
+JOIN:
+
+JOIN allow us to combine multiple tables together.
+
+INNER JOIN:
+
+NOTE: JOIN is a shorthand of INNER JOIN. If we mention as JOIN SQL will consider it as INNER JOIN. 
+
+INNER JOIN -> Common to both.
+
+
+SELECT payment_id,payment.customer_id,first_name 
+FROM payment
+INNER JOIN customer
+ON payment.customer_id = customer.customer_id
+
+
+Notes: 
+while selecting column using SELECT, If both column is present in both the tables specify it with dot notation like 
+"payment.customer_id". it means we are selecting customer_id which is available in both the tables but we are selecting it from payment table. Also by doing this we can only see the customers who made transaction in both tables. we will not see any customer who made transaction in any one table. that is how SELECT will work.
+
+To unique column SQL is smart enough to know where to retrive the column. 
+
+
+OUTER JOIN: 
+
+One of the complex join to understand. 
+
+This specifies how to deal with values only present in one of the tables being joined.
+
+Types of Outer Joins:
+1. FULL OUTER JOIN - Just Grabs everything and fills NULL wherever the value is not available.
+   FULL OUTER JOIN with WHERE is like We have performed joining table further we are filtering using WHERE clause (WHERE col_name = NULL). It is exact opposite of INNER JOIN. INNER JOIN gets the common content from two tables. drops 'NULL' values.
+
+
+2. LEFT OUTER JOIN
+3. RIGHT OUTER JOIN
 
 
 
