@@ -216,6 +216,22 @@ ANS: 20
 
 ANS: Eddie Tomlin
 
+AS Clause:
+
+It is used to remname the column and results.
+
+Syntax:
+
+SELECt col_name AS new_name FROM table
+
+We can name a column or name a aggregation result ect.
+
+SELECT customer_id AS cus_ID FROM customer
+
+ANS: cus_id col name will be returned. note the col name in small letters. (because cap letter denotes keyword in SQL)
+
+NOTE: AS operator executed at the end of the query, we cannot use the ALIAS names created using AS keyword with WHERE in the query.
+
 
 
 
