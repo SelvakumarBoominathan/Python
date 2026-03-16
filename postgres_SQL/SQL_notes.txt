@@ -7,6 +7,142 @@ General Guidelines:
 - Capitalize all SQL keywords for readability. End each statement with a semicolon (;).
 - Use lowercase for table and column names to distinguish them from SQL keywords.
 - Avoid using SQL reserved keywords as table or column names. If unavoidable, use double quotes (e.g., "length") but it's better to choose different names.
+- Notice that SQL language is case insensitive.
+
+SELECT:
+------
+- The SELECT statement is used to retrieve data from one or more tables.
+- You can specify which columns to retrieve, or use * to select all columns (not recommended for production).
+- Syntax: SELECT column1, column2 FROM table_name;
+- Always end statements with a semicolon (;).
+
+Example:
+SELECT first_name, last_name FROM customer;
+
+Scenario:
+Retrieve all customer emails from the customer table.
+Solution:
+SELECT email FROM customer;
+
+DISTINCT:
+---------
+- DISTINCT is used to remove duplicate values from the result set.
+- It applies to all columns listed after SELECT DISTINCT.
+- Useful when you want to see only unique values.
+
+Example:
+SELECT DISTINCT city FROM address;
+
+Scenario:
+Find all unique ratings from the film table.
+Solution:
+SELECT DISTINCT rating FROM film;
+
+DISTINCT ON:
+------------
+- DISTINCT ON is a PostgreSQL-specific feature.
+- It returns the first row of each set of rows where the given expressions are equal.
+- You must use ORDER BY to control which row is returned for each group. Note that the first column you use with ORDER BY should match with the column you use with DISTINCT ON.
+- Note the column we use with DISTINCT ON inside the () will also be used with SELECT clause. 
+
+Syntax:
+SELECT DISTINCT ON (column) column, other_columns
+FROM table
+ORDER BY column, other_columns;
+
+Example:
+SELECT DISTINCT ON (customer_id) customer_id, payment_date, amount
+FROM payment
+ORDER BY customer_id, payment_date DESC;
+
+Scenario:
+For each customer, get their most recent payment.
+Solution:
+SELECT DISTINCT ON (customer_id) customer_id, payment_date, amount
+FROM payment
+ORDER BY customer_id, payment_date DESC;
+
+
+WHERE:
+------
+- The WHERE clause is used to filter records that meet specific conditions.
+- It comes after the FROM clause and before GROUP BY, HAVING, or ORDER BY.
+- WHERE can use comparison operators (=, <, >, <=, >=, <>, !=), logical operators (AND, OR, NOT), and pattern matching (LIKE, IN, BETWEEN).
+- WHERE only filters rows before aggregation; to filter after aggregation, use HAVING.
+
+Syntax:
+SELECT column1, column2
+FROM table_name
+WHERE condition;
+
+Examples:
+- Select all customers from city_id 300:
+  SELECT * FROM customer WHERE city_id = 300;
+
+- Select all films with a rating of 'PG':
+  SELECT title FROM film WHERE rating = 'PG';
+
+- Select all payments greater than $5:
+  SELECT * FROM payment WHERE amount > 5;
+
+- Select customers with first name 'John' and last name 'Smith':
+  SELECT * FROM customer WHERE first_name = 'John' AND last_name = 'Smith';
+
+- Select films released between 2005 and 2010:
+  SELECT title FROM film WHERE release_year BETWEEN 2005 AND 2010;
+
+- Select customers whose email ends with 'gmail.com':
+  SELECT * FROM customer WHERE email LIKE '%gmail.com';
+
+Edge Cases & Notes:
+-------------------
+- NULL values: Comparisons with NULL using = or <> will not return true. Use IS NULL or IS NOT NULL.
+  Example: SELECT * FROM customer WHERE email IS NULL;
+
+- Case sensitivity: String comparisons are case-insensitive in most databases, but not all. Use ILIKE in PostgreSQL for case-insensitive matching.
+
+- Multiple conditions: Use parentheses to control logical operator precedence.
+  Example: SELECT * FROM film WHERE (rating = 'PG' OR rating = 'G') AND length > 120;
+
+- No matching rows: If no rows match the WHERE condition, the result set is empty.
+
+- WHERE with JOIN: You can use WHERE to filter results after joining tables.
+  Example: SELECT * FROM payment JOIN customer ON payment.customer_id = customer.customer_id WHERE payment.amount > 10;
+
+Scenario:
+---------
+Find all customers who have made a payment greater than $50.
+
+Solution:
+SELECT customer_id, amount
+FROM payment
+WHERE amount > 50;
+
+Scenario:
+---------
+Find all films with a title starting with 'A' and a length less than 90 minutes.
+
+Solution:
+SELECT title, length
+FROM film
+WHERE title LIKE 'A%' AND length < 90;
+
+Scenario:
+---------
+Find all customers who do not have an email address.
+
+Solution:
+SELECT customer_id, first_name, last_name
+FROM customer
+WHERE email IS NULL;
+
+Summary:
+--------
+- Use WHERE to filter rows before aggregation or grouping.
+- Always use IS NULL/IS NOT NULL for NULL checks.
+- Combine conditions with AND/OR and use parentheses for clarity.
+- WHERE is essential for precise data retrieval and query optimization.
+
 
 COUNT():
 --------
@@ -27,10 +163,17 @@ ORDER BY:
 
 LIMIT:
 ------
-- LIMIT restricts the number of rows returned.
-- Syntax: LIMIT number_of_rows
-- LIMIT is placed at the end of the query.
-- Example: SELECT * FROM table_name LIMIT 10;
+- Restricts the number of rows returned.
+- Syntax: SELECT * FROM table LIMIT n;
+- IF n is NULL. It returns all the rows. If n is 0 then no rows will be returned. If n is a negative number (EG: -2) then it will through error like limit cannot be negative.
+- If we want to skip the rows then use OFFSET with LIMIT. 
+
+Syntax: LIMIT 5 OFFSET 3   -> It will omit the first 3 (1, 2, 3) rows then it will return 5 rows starung from 4 (4, 5, 6, 7, 8). 
+
+Scenario:
+Get the first 5 customers.
+Solution:
+SELECT * FROM customer LIMIT 5;
 
 BETWEEN & NOT BETWEEN:
 ----------------------
@@ -45,6 +188,8 @@ IN & NOT IN:
 - Example: WHERE color IN ('red', 'blue', 'green')
 - Use NOT IN to exclude values.
 - Example: WHERE color NOT IN ('red', 'blue', 'green')
+- Sub Query : use IN and NOT IN with Sub Query
+
 
 LIKE & ILIKE:
 -------------
@@ -104,6 +249,7 @@ GROUP BY:
 ---------
 - GROUP BY is used to group rows that have the same values in specified columns, often used with aggregate functions.
 - You can group by one or more columns.
+- GROUP BY comes right after FROM clause.
 - Every column in the SELECT list that is not an aggregate must be included in the GROUP BY clause.
 
 Example:
@@ -151,8 +297,7 @@ FROM payment
 GROUP BY DATE(payment_date)
 ORDER BY SUM(amount) DESC;
 
-HAVING
-:
+HAVING:
 ------
 - HAVING is used to filter groups created by GROUP BY based on aggregate conditions.
 - WHERE filters rows before grouping; HAVING filters after aggregation.
