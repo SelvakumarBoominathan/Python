@@ -507,6 +507,8 @@ Find all payments and identify which ones have valid customer records.
 Solution:
 SELECT payment.payment_id, payment.amount, customer.customer_id, customer.first_name
 FROM customer
+
+
 RIGHT OUTER JOIN payment
 ON customer.customer_id = payment.customer_id
 WHERE customer.customer_id IS NULL;
