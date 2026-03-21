@@ -570,6 +570,24 @@ TO_CHAR():
   useful when formatting the timestamp
   syntax: TO_CHAR(col_name, 'mm-dd-yyyy')
 
+  NOTE : 
+  MON - Month in string (first 3 char of month name)  
+  EG: 
+  SELECT  TO_CHAR(payment_date, 'DD-MON-YYYY' ) AS YEAR 
+  FROM payment
+
+  O/P -> 15-FEB-2026
+
+
+  MM - Month in neumeric  
+  EG: 
+  SELECT  TO_CHAR(payment_date, 'DD-MM-YYYY' ) AS YEAR 
+  FROM payment
+
+  O/P -> 15-02-2026
+
+
+
   
 
 
