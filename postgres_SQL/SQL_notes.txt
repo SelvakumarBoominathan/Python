@@ -523,68 +523,464 @@ Notes:
 
 
 Timestamps and Extract:
-TIME : Contains only time
-DATE : Contains only date
-TimeStamp : Contains Date and Time
-TimeStamptz : Contains Date, Time and Time Zone
+-----------------------
 
+Data Types:
+- TIME: Contains only time (HH:MM:SS)
+- DATE: Contains only date (YYYY-MM-DD)
+- TIMESTAMP: Contains date and time (YYYY-MM-DD HH:MM:SS)
+- TIMESTAMPTZ: Contains date, time, and timezone (YYYY-MM-DD HH:MM:SS±HH:MM)
+
+System Information Commands:
+----------------------------
 
 SHOW:
+- SHOW ALL: Displays all database parameters and their current values.
+- SHOW TIMEZONE: Shows the current timezone of the database server.
 
-SHOW ALL  -> Shows the parameters
-SHOW TIMEZONE  -> Shows the current timezone that our machine runs
+Example:
+SHOW TIMEZONE;
 
+NOW():
+- Returns the current date and time as a TIMESTAMP WITH TIME ZONE.
+- Useful for recording when a query is executed.
 
-NOW:
+Syntax:
+SELECT NOW();
 
-SELECT NOW()  -> Gives the current time stamp information (Date, Time(Hr:Min:Sec), Zone(neumerical information)) 
+Output: 2026-03-19 14:23:26.524033+00:00
 
+TIMEOFDAY():
+- Returns the current date and time as a formatted string (text).
+- More readable format compared to NOW().
 
-TIMEOFDAY:
- for string time stamp.
-SELECT TIMEOFDAY()  -> Eg : "Thu Mar 19 14:23:26.524033 2026 EDT"
+Syntax:
+SELECT TIMEOFDAY();
 
+Output: "Thu Mar 19 14:23:26.524033 2026 EDT"
 
 CURRENT_TIME & CURRENT_DATE:
+- CURRENT_TIME: Returns only the current time with timezone offset.
+- CURRENT_DATE: Returns only the current date.
 
-SELECT CURRENT_TIME -> 14:24:22 437636-04:00
+Syntax:
+SELECT CURRENT_TIME;    -- Output: 14:24:22.437636-04:00
+SELECT CURRENT_DATE;    -- Output: 2026-03-19
 
-SELECT CURRENT_DATE  -> 2026-03-19
+Date and Time Functions:
+------------------------
 
+EXTRACT():
+- Extracts specific components (year, month, day, hour, minute, second) from date/timestamp values.
+- Useful for filtering or grouping by specific date components.
 
+Syntax:
+EXTRACT(component FROM column_name)
 
-How to Extract information from time based data type using:
-EXTRACT():  
-  Scenario: Lets assume you have to extract sub component of date value (Year).
-  Syntax : EXTRACT(YEAR FROM Col_name)
+Common Components:
+- YEAR, MONTH, DAY, HOUR, MINUTE, SECOND, DOW (day of week), DOY (day of year)
 
+Examples:
+- Extract the year from a payment date:
+  SELECT EXTRACT(YEAR FROM payment_date) FROM payment;
+
+- Extract the month from a payment date:
+  SELECT EXTRACT(MONTH FROM payment_date) FROM payment;
+
+- Extract the day:
+  SELECT EXTRACT(DAY FROM payment_date) FROM payment;
+
+Scenario:
+Find all payments made in the year 2020.
+
+Solution:
+SELECT payment_id, amount, payment_date
+FROM payment
+WHERE EXTRACT(YEAR FROM payment_date) = 2020;
+
+Scenario:
+Group payments by month and find the total amount per month.
+
+Solution:
+SELECT EXTRACT(MONTH FROM payment_date) AS month, SUM(amount) AS total_amount
+FROM payment
+GROUP BY EXTRACT(MONTH FROM payment_date)
+ORDER BY month;
 
 AGE():
-  Scenario: Lets assume you want to calculate the age from a col which contains timestamp.
-  Syntax : AGE(col_name)
-  returns: 13 year 1 mon 5 days 1:34:13.003423
+- Calculates the age/interval between two dates or between a date and NOW().
+- Returns the result as an interval (years, months, days, hours, minutes, seconds).
 
+Syntax:
+AGE(timestamp1, timestamp2)  -- Returns interval between two timestamps
+AGE(timestamp1)              -- Returns interval between timestamp and NOW()
+
+Examples:
+- Calculate how long ago a payment was made:
+  SELECT payment_id, AGE(NOW(), payment_date)
+  FROM payment
+  LIMIT 5;
+
+  Output: 13 years 1 mon 5 days 01:34:13.003423
+
+- Calculate a customer's age from their birth date:
+  SELECT customer_id, AGE(birth_date)
+  FROM customer;
+
+Scenario:
+Find customers whose account was created more than 5 years ago.
+
+Solution:
+SELECT customer_id, first_name, created_date
+FROM customer
+WHERE AGE(NOW(), created_date) > INTERVAL '5 years';
+
+Scenario:
+Find all recent payments made within the last 30 days.
+
+Solution:
+SELECT payment_id, customer_id, amount, payment_date
+FROM payment
+WHERE AGE(NOW(), payment_date) < INTERVAL '30 days'
+ORDER BY payment_date DESC;
 
 TO_CHAR():
-  General function to convert datatype to text value.
-  useful when formatting the timestamp
-  syntax: TO_CHAR(col_name, 'mm-dd-yyyy')
+- Converts date/timestamp values to text with a specified format.
+- Useful for formatting dates for display or reporting.
 
-  NOTE : 
-  MON - Month in string (first 3 char of month name)  
-  EG: 
-  SELECT  TO_CHAR(payment_date, 'DD-MON-YYYY' ) AS YEAR 
+Syntax:
+TO_CHAR(column_name, 'format_string')
+
+Common Format Codes:
+- YYYY: 4-digit year (e.g., 2026)
+- YY: 2-digit year (e.g., 26)
+- MM: Month as number (01-12)
+- MON: Month as 3-letter abbreviation (JAN, FEB, MAR)
+- MONTH: Full month name (JANUARY, FEBRUARY)
+- DD: Day of month (01-31)
+- DAY: Full day name (MONDAY, TUESDAY)
+- DY: 3-letter day abbreviation (MON, TUE)
+- HH24: Hour in 24-hour format (00-23)
+- HH: Hour in 12-hour format (01-12)
+- MI: Minutes (00-59)
+- SS: Seconds (00-59)
+
+Examples:
+- Format as DD-MON-YYYY (e.g., 15-FEB-2026):
+  SELECT TO_CHAR(payment_date, 'DD-MON-YYYY') AS formatted_date
+  FROM payment;
+
+- Format as DD-MM-YYYY (e.g., 15-02-2026):
+  SELECT TO_CHAR(payment_date, 'DD-MM-YYYY') AS formatted_date
+  FROM payment;
+
+- Format as YYYY-MM-DD HH24:MI:SS:
+  SELECT TO_CHAR(payment_date, 'YYYY-MM-DD HH24:MI:SS') AS formatted_date
+  FROM payment;
+
+- Format with full month and day names:
+  SELECT TO_CHAR(payment_date, 'Day, Month DD, YYYY') AS formatted_date
+  FROM payment;
+  -- Output: Thursday, February 15, 2026
+
+Scenario:
+Display all payment dates in a user-friendly format (e.g., 15-FEB-2026).
+
+Solution:
+SELECT payment_id, customer_id, amount,
+       TO_CHAR(payment_date, 'DD-MON-YYYY HH24:MI:SS') AS formatted_date
+FROM payment
+ORDER BY payment_date DESC;
+
+TO_DATE():
+- Converts text/string to a DATE type.
+- Useful when working with date strings from user input or external sources.
+
+Syntax:
+TO_DATE(string, 'format_string')
+
+Example:
+- Convert string to date:
+  SELECT TO_DATE('15-FEB-2026', 'DD-MON-YYYY') AS converted_date;
+
+Scenario:
+Find all payments made on or after a specific date provided as text (e.g., '2026-01-01').
+
+Solution:
+SELECT payment_id, customer_id, amount, payment_date
+FROM payment
+WHERE payment_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')
+ORDER BY payment_date;
+
+INTERVAL:
+- Represents a duration or time span.
+- Useful for date arithmetic and age calculations.
+
+Syntax:
+INTERVAL 'value unit'
+Examples: INTERVAL '1 day', INTERVAL '5 hours', INTERVAL '2 years 3 months'
+
+Examples:
+- Add 5 days to current date:
+  SELECT NOW() + INTERVAL '5 days';
+
+- Subtract 1 month from a date:
+  SELECT payment_date - INTERVAL '1 month' FROM payment;
+
+- Find payments from the past week:
+  SELECT *
   FROM payment
+  WHERE payment_date > NOW() - INTERVAL '7 days'
+  ORDER BY payment_date DESC;
 
-  O/P -> 15-FEB-2026
+String Functions:
+-----------------
 
+LENGTH():
+- Returns the number of characters in a string.
+- Useful for validating string length or finding long entries.
 
-  MM - Month in neumeric  
-  EG: 
-  SELECT  TO_CHAR(payment_date, 'DD-MM-YYYY' ) AS YEAR 
-  FROM payment
+Syntax:
+LENGTH(column_name)
 
-  O/P -> 15-02-2026
+Example:
+- Find customers with first names longer than 5 characters:
+  SELECT customer_id, first_name, LENGTH(first_name) AS name_length
+  FROM customer
+  WHERE LENGTH(first_name) > 5
+  ORDER BY name_length DESC;
+
+UPPER():
+- Converts a string to uppercase.
+- Useful for standardizing text for comparison or display.
+
+Syntax:
+UPPER(column_name)
+
+Example:
+- Display all customer names in uppercase:
+  SELECT customer_id, UPPER(first_name) AS first_name_upper, UPPER(last_name) AS last_name_upper
+  FROM customer;
+
+LOWER():
+- Converts a string to lowercase.
+- Useful for case-insensitive comparisons or standardizing data.
+
+Syntax:
+LOWER(column_name)
+
+Example:
+- Find customers with email containing 'admin' (case-insensitive):
+  SELECT customer_id, email
+  FROM customer
+  WHERE LOWER(email) LIKE '%admin%';
+
+INITCAP():
+- Converts a string to title case (first letter of each word capitalized).
+- PostgreSQL-specific function.
+
+Syntax:
+INITCAP(column_name)
+
+Example:
+- Format customer names in title case:
+  SELECT customer_id, INITCAP(first_name) AS first_name, INITCAP(last_name) AS last_name
+  FROM customer;
+
+CONCAT() or || Operator:
+- Joins multiple strings together.
+- CONCAT() is more explicit; || is the traditional SQL approach.
+
+Syntax:
+CONCAT(string1, string2, string3, ...)
+OR
+string1 || string2 || string3
+
+Examples:
+- Concatenate first and last names:
+  SELECT customer_id, CONCAT(first_name, ' ', last_name) AS full_name
+  FROM customer;
+
+  OR
+
+  SELECT customer_id, first_name || ' ' || last_name AS full_name
+  FROM customer;
+
+- Create email-like strings:
+  SELECT customer_id, CONCAT(LOWER(first_name), '.', LOWER(last_name), '@company.com') AS suggested_email
+  FROM customer;
+
+Scenario:
+Create a formatted list of customers with their full names and contact info.
+
+Solution:
+SELECT customer_id,
+       INITCAP(first_name) || ' ' || INITCAP(last_name) AS full_name,
+       email,
+       phone
+FROM customer
+LIMIT 10;
+
+SUBSTRING() or SUBSTR():
+- Extracts a portion of a string.
+- SUBSTRING is ANSI SQL standard; SUBSTR is also widely supported.
+
+Syntax:
+SUBSTRING(string FROM start_position FOR length)
+OR
+SUBSTR(string, start_position, length)
+
+Examples:
+- Extract first 3 characters of a film title:
+  SELECT title, SUBSTRING(title FROM 1 FOR 3) AS title_prefix
+  FROM film;
+
+- Extract domain from email (after @):
+  SELECT email, SUBSTRING(email FROM POSITION('@' IN email) + 1) AS email_domain
+  FROM customer;
+
+Scenario:
+Find all customers whose first name starts with 'J' and extract the first 3 characters.
+
+Solution:
+SELECT customer_id, first_name, SUBSTRING(first_name FROM 1 FOR 3) AS name_prefix
+FROM customer
+WHERE first_name LIKE 'J%';
+
+POSITION() or STRPOS():
+- Finds the position of a substring within a string.
+- Returns 0 if the substring is not found.
+- POSITION is ANSI SQL standard; STRPOS is PostgreSQL-specific.
+
+Syntax:
+POSITION(substring IN string)
+OR
+STRPOS(string, substring)
+
+Examples:
+- Find position of '@' in email:
+  SELECT email, POSITION('@' IN email) AS at_position
+  FROM customer;
+
+- Find customers with 'gmail' in their email:
+  SELECT customer_id, email
+  FROM customer
+  WHERE POSITION('gmail' IN email) > 0;
+
+TRIM(), LTRIM(), RTRIM():
+- TRIM(): Removes leading and trailing whitespace (or specified characters).
+- LTRIM(): Removes leading whitespace (or specified characters).
+- RTRIM(): Removes trailing whitespace (or specified characters).
+
+Syntax:
+TRIM(string)
+LTRIM(string)
+RTRIM(string)
+
+Examples:
+- Remove extra spaces from customer names:
+  SELECT customer_id, TRIM(first_name) AS first_name
+  FROM customer;
+
+- Remove leading zeros:
+  SELECT LTRIM(product_code, '0') AS product_code
+  FROM products;
+
+REPLACE():
+- Replaces all occurrences of a substring with another string.
+- Useful for data cleaning or standardization.
+
+Syntax:
+REPLACE(string, substring_to_find, replacement_string)
+
+Examples:
+- Replace 'gmail.com' with 'company.com' in emails:
+  SELECT customer_id, REPLACE(email, 'gmail.com', 'company.com') AS new_email
+  FROM customer;
+
+- Standardize phone numbers by removing hyphens:
+  SELECT customer_id, REPLACE(phone, '-', '') AS phone_standardized
+  FROM customer;
+
+Scenario:
+Clean up customer email addresses by replacing all '.co' with '.com'.
+
+Solution:
+SELECT customer_id, email,
+       REPLACE(email, '.co', '.com') AS corrected_email
+FROM customer
+WHERE email LIKE '%.co%';
+
+SPLIT_PART():
+- Splits a string by a delimiter and returns a specific part.
+- PostgreSQL-specific function.
+
+Syntax:
+SPLIT_PART(string, delimiter, part_number)
+
+Examples:
+- Extract domain extension from email:
+  SELECT email, SPLIT_PART(email, '.', 2) AS domain_name
+  FROM customer;
+
+- Extract state from address (if stored as "City, State"):
+  SELECT address, SPLIT_PART(address, ', ', 2) AS state
+  FROM customer_address;
+
+Combined Scenario: Date and String Functions:
+----------------------------------------------
+
+Scenario:
+Generate a report showing customer names (in title case), their signup date formatted as 'DD-MON-YYYY', and how long they've been a customer.
+
+Solution:
+SELECT customer_id,
+       INITCAP(first_name) || ' ' || INITCAP(last_name) AS full_name,
+       TO_CHAR(created_date, 'DD-MON-YYYY') AS signup_date,
+       AGE(NOW(), created_date) AS account_age,
+       EXTRACT(YEAR FROM AGE(NOW(), created_date)) AS years_as_customer
+FROM customer
+ORDER BY created_date DESC
+LIMIT 10;
+
+Scenario:
+Find all payments made in February 2026, display the date in a readable format, and show the payment amount with customer full names.
+
+Solution:
+SELECT p.payment_id,
+       INITCAP(c.first_name) || ' ' || INITCAP(c.last_name) AS customer_name,
+       TO_CHAR(p.payment_date, 'DD-MON-YYYY HH24:MI:SS') AS formatted_date,
+       p.amount
+FROM payment p
+JOIN customer c ON p.customer_id = c.customer_id
+WHERE EXTRACT(YEAR FROM p.payment_date) = 2026
+  AND EXTRACT(MONTH FROM p.payment_date) = 2
+ORDER BY p.payment_date DESC;
+
+Summary:
+--------
+Date and Time Functions:
+- Use EXTRACT() to get specific date components for filtering or grouping.
+- Use AGE() to calculate intervals between dates.
+- Use TO_CHAR() for formatting dates for display.
+- Use INTERVAL for date arithmetic and comparisons.
+- Use CURRENT_DATE, CURRENT_TIME, and NOW() for current date/time values.
+
+String Functions:
+- Use LENGTH() to validate string length.
+- Use UPPER(), LOWER(), INITCAP() for case conversion.
+- Use CONCAT() or || for string concatenation.
+- Use SUBSTRING() to extract portions of strings.
+- Use POSITION()/STRPOS() to find substring locations.
+- Use TRIM() family functions to remove whitespace.
+- Use REPLACE() for data cleaning.
+- Use SPLIT_PART() to extract parts of delimited strings.
+
+Interview Tips:
+- Practice combining date and string functions in one query.
+- Understand the difference between DATE, TIME, TIMESTAMP, and TIMESTAMPTZ.
+- Know when to use WHERE vs HAVING for filtering.
+- Be familiar with date formatting codes for TO_CHAR().
 
 
 
