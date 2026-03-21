@@ -522,5 +522,56 @@ Notes:
 
 
 
+Timestamps and Extract:
+TIME : Contains only time
+DATE : Contains only date
+TimeStamp : Contains Date and Time
+TimeStamptz : Contains Date, Time and Time Zone
+
+
+SHOW:
+
+SHOW ALL  -> Shows the parameters
+SHOW TIMEZONE  -> Shows the current timezone that our machine runs
+
+
+NOW:
+
+SELECT NOW()  -> Gives the current time stamp information (Date, Time(Hr:Min:Sec), Zone(neumerical information)) 
+
+
+TIMEOFDAY:
+ for string time stamp.
+SELECT TIMEOFDAY()  -> Eg : "Thu Mar 19 14:23:26.524033 2026 EDT"
+
+
+CURRENT_TIME & CURRENT_DATE:
+
+SELECT CURRENT_TIME -> 14:24:22 437636-04:00
+
+SELECT CURRENT_DATE  -> 2026-03-19
+
+
+
+How to Extract information from time based data type using:
+EXTRACT():  
+  Scenario: Lets assume you have to extract sub component of date value (Year).
+  Syntax : EXTRACT(YEAR FROM Col_name)
+
+
+AGE():
+  Scenario: Lets assume you want to calculate the age from a col which contains timestamp.
+  Syntax : AGE(col_name)
+  returns: 13 year 1 mon 5 days 1:34:13.003423
+
+
+TO_CHAR():
+  General function to convert datatype to text value.
+  useful when formatting the timestamp
+  syntax: TO_CHAR(col_name, 'mm-dd-yyyy')
+
+  
+
+
 
 
