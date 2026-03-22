@@ -69,6 +69,7 @@ WHERE:
 - It comes after the FROM clause and before GROUP BY, HAVING, or ORDER BY.
 - WHERE can use comparison operators (=, <, >, <=, >=, <>, !=), logical operators (AND, OR, NOT), and pattern matching (LIKE, IN, BETWEEN).
 - WHERE only filters rows before aggregation; to filter after aggregation, use HAVING.
+- Aggregate function cannot be nested.
 
 Syntax:
 SELECT column1, column2
@@ -424,8 +425,7 @@ ON payment.customer_id = customer.customer_id
 
 
 Notes: 
-while selecting column using SELECT, If both column is present in both the tables specify it with dot notation like 
-"payment.customer_id". it means we are selecting customer_id which is available in both the tables but we are selecting it from payment table. Also by doing this we can only see the customers who made transaction in both tables. we will not see any customer who made transaction in any one table. that is how SELECT will work.
+while selecting column using SELECT, If both column is present in both the tables specify it with dot notation like "payment.customer_id". it means we are selecting customer_id which is available in both the tables but we are selecting it from payment table. Also by doing this we can only see the customers who made transaction in both tables. we will not see any customer who made transaction in any one table. that is how SELECT will work.
 
 To unique column SQL is smart enough to know where to retrive the column. 
 
@@ -983,8 +983,38 @@ Interview Tips:
 - Be familiar with date formatting codes for TO_CHAR().
 
 
+STRING functions:
+String concatination :  'postgre' || 'SQL'   ->  'postgreSQL
+REPEAT('ab', 3) -> 'ababab'
+REVERSE('hello') -> 'olleh'
+LPAD('5', 3, '0') -> '005'
+RPAD('5', 3, '0') -> '500'
+ASCII('A') -> 65
+CHR(65) -> 'A'
+BTRIM('  text  ') -> 'text'
+TRANSLATE('hello', 'helo', '1234') -> '1433o'
+REGEXP_REPLACE('abc123', '[0-9]', 'X') -> 'abcXXX'
+REGEXP_SUBSTR('abc123def', '[0-9]+') -> '123'
+SIMILAR TO 'a%c' -> pattern matching (ANSI SQL)
 
-  
+Refer documentation from SQL.
+
+
+
+SUB QUERY:
+
+NOTE: Sub query will be executed first always.
+      Ensure your subquery returns single or multiple values. based on this only we can decide either to use comparision operator (for single) or IN operator (for multiple)
+
+EG: 
+SELECT rental_rate, title  FROM film
+WHERE rental_rate < (SELECT AVG(rental_rate) FROM film)
+
+Self-join : 
+
+Self join is useful to compare two columns in a same table. Two copies of same table taken for comparision for this.
+No Special keyword just use the Join keyword with the same table name in both parts to join. 
+So need to use Alias to distinguish the tables.
 
 
 
