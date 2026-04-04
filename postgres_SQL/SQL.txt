@@ -220,6 +220,9 @@ CREATE TABLE sku_details(
        last_login TIMESTAMP 
 )
 
+Execute the script and refresh the DB. New table named sku_details is created with defined columns names and constraints.
+NOTE: Common Error, if you try to execute the same script again. it will through an error saying TABLE' sku_details' already exists. 
+
 
 
 
