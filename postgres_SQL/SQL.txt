@@ -146,3 +146,61 @@ Primary key: a column that uniquely identifies each row in a table. It should be
 
 Foreign key: It ia a column of data in one table that points to the primary key of the other table. connects one table to another table.  Can have duplicates but must match the value in referenced primary key. Can be "Null"
 
+What are constraints?
+Constraints are set of rules applied in a column of a database table to prevent invalid data into the database. This ensures the accuracy and reliability of the data in the database.
+
+Types:
+Constraints on column
+Constraints on table
+
+
+Common COLUMN Constraints:
+1. NOT NULL constraint. (All values of the table in a column of a table should not contain Null value)
+2. UNIQUE Constraint. (Uniquely identifies the data in a column of a table)
+3. PRIMARY KEY Constraint (Uniquely identifies each row / record of a table)
+4. FOREIGN KEY Constraint. (Constraints data based on columns in other tables)
+5. CHECK Constraint. (Ensures certain checks or conditions are satisfied)
+6. EXCLUSION Constraint. 
+
+
+Common TABLE Constraints:
+1. CHECK Constraint.
+2. REFERENCE Constraint.
+3. UNIQUE Constraint.
+4. PRIMARY KEY Constraint
+
+
+
+CREATE:
+
+General Syntax while creating table:
+
+CREATE TABLE table_name(
+       column_name TYPE column_constraint,
+       column_name TYPE column_constraint,
+       table constraint table constraint
+) INHERITS existing_table_name;
+
+Note: Here TYPE is referenig to inbuild keyword in SQL 'SERIAL'. This will create unique list of integers best for creating IDs which can be further refered as primary keys. It will not adjest the integer if we delete any row later. 
+
+Some Common Constraints:
+
+PRIMARY KEY → unique + not null
+FOREIGN KEY → reference
+UNIQUE → no duplicates
+NOT NULL → must have value
+CHECK → condition
+DEFAULT → fallback value
+
+Some Common Types:
+
+INT → numbers
+TEXT → strings
+TIMESTAMP → date/time
+BOOLEAN → true/false
+UUID / SERIAL → identifiers
+JSONB → structured data
+
+
+
+
