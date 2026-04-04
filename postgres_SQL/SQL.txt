@@ -140,4 +140,9 @@ Points to Remember:
 - For dates, ensure the format matches the database standard.
 - Use WHERE with caution to avoid unintentional data filtering.
 
+Primary and Foreign key:
+
+Primary key: a column that uniquely identifies each row in a table. It should be unique, not null.
+
+Foreign key: It ia a column of data in one table that points to the primary key of the other table. connects one table to another table.  Can have duplicates but must match the value in referenced primary key. Can be "Null"
 
