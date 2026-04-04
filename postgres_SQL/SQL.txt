@@ -204,3 +204,22 @@ JSONB → structured data
 
 
 
+HOW TO CREATE DATABASE?
+
+-> Click on 'PostgreSQL 18' 
+-> R Click on Databases and click Create 'Database'
+-> Name the database and save it. 
+-> R Click on the 'Databases' and click refresh the page to see the newly created DB. 
+-> R Click and open the query tool to write script to create table in the newly created DB.
+-> Sample Query
+
+CREATE TABLE sku_details(
+       sku_id SERIAL PRIMARY KEY,
+       sku VARCHAR(50) UNIQUE NOT NULL,
+       created_on TIMESTAMP NOT NULL,
+       last_login TIMESTAMP 
+)
+
+
+
+
