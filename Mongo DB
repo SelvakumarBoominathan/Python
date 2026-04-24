@@ -20,7 +20,7 @@ Imagine you walk into this library and open a file about a person:
 
 ```json
 {
-  "name": "Selva",
+  "name": "Austin",
   "skills": ["MongoDB", "Node.js"],
   "experience": { "years": 3 }
 }
