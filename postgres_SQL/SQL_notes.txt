@@ -1016,6 +1016,21 @@ Self join is useful to compare two columns in a same table. Two copies of same t
 No Special keyword just use the Join keyword with the same table name in both parts to join. 
 So need to use Alias to distinguish the tables.
 
+Implicit Vs Explicit conversion:
 
+Implicit conversion done automatically by the SQL engine.
+EG: 
+-- '2026-04-24' (string) implicitly converted to DATE
+SELECT *
+FROM orders
+WHERE order_date = '2026-04-24';
+
+
+Explicit conversion we control the conversion using functions. It is Safer, clearer, and avoids ambiguity.
+EG: 
+-- Explicit conversion using standard SQL (varies by DB)
+SELECT *
+FROM orders
+WHERE order_date = CAST('2026-04-24' AS DATE);
 
 
