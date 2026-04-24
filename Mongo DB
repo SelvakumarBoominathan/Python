@@ -14,6 +14,9 @@ MongoDB says:
 
 Instead, it stores documents—more like flexible records.
 
+
+
+
 ## Scene 1: A Single Record (Document)
 
 Imagine you walk into this library and open a file about a person:
@@ -26,17 +29,19 @@ Imagine you walk into this library and open a file about a person:
 }
 ```
 
-This is a document.
+This is a document. (Single User Object = Document)
 
 The key point: The next person’s document can look different. Maybe they don’t have "skills" or have extra fields. MongoDB adapts without complaining.
 
 **Big Idea:** MongoDB stores flexible, JSON-like objects instead of rigid rows.
 
+
+
 ## Scene 2: Collections (Folders in the Library)
 
 Now imagine many such documents grouped together.
 
-- All “users” go into one folder → called a **collection**
+- All “users” go into one folder → called a **collection**  (Tables = Collections)
 - All “orders” go into another folder
 
 So:
@@ -44,6 +49,9 @@ So:
 - Document = one file
 - Collection = folder
 - Database = entire library
+
+
+
 
 ## Scene 3: Who Handles Your Request?
 
@@ -59,9 +67,15 @@ It:
 - Writes data
 - Searches documents
 
+
+
+
 ## Scene 4: When Things Get Big (Scaling Problem)
 
 Your library becomes huge—millions of documents. One librarian (one server) can’t handle everything. MongoDB introduces sharding.
+
+
+
 
 ## Scene 5: Splitting the Library (Sharding)
 
@@ -75,16 +89,22 @@ This is called **sharding**.
 
 You need a receptionist: **mongos**.
 
-It doesn’t store data. It routes: “Oh, you’re looking for Selva? Go to building #2.”
+It doesn’t store data. It routes: “Oh, you’re looking for Austin? Go to building #2.”
 
 So:
 
 - mongos → router
 - Shards → actual storage
 
+
+
+
 ## Scene 6: What If a Server Crashes?
 
 Imagine one building catches fire (server crash). Do we lose data? MongoDB says: No.
+
+
+
 
 ## Scene 7: Replication (Backup Copies)
 
@@ -100,9 +120,14 @@ When you write data:
 
 If primary dies, one secondary becomes the new primary automatically. No manual fixes needed.
 
+
+
+
 ## Scene 8: Finding Data Fast (Indexes)
 
 Searching without an index means opening every file manually. MongoDB creates indexes, like a book index: “Selva → page 42.” It jumps directly instead of scanning everything.
+
+
 
 ## Scene 9: How Data Is Actually Stored
 
@@ -115,6 +140,8 @@ It handles:
 - Compression (less space)
 - Caching (faster reads)
 - Concurrency (multiple users at once)
+
+
 
 ## Scene 10: Real-Life Flow (Putting It All Together)
 
@@ -131,15 +158,19 @@ Journey:
 
 All in milliseconds.
 
+
+
 ## Bonus Scene: Querying and Aggregating Data
 
 MongoDB uses a query language to find documents. For example:
 
-```javascript
+
 db.users.find({ "experience.years": 3 })
-```
+
 
 For complex operations, use aggregation pipelines to transform data, like grouping or calculating averages.
+
+
 
 ## Final Mental Model
 
@@ -149,6 +180,8 @@ MongoDB is a distributed document library where:
 - Data is spread across multiple machines (sharding)
 - Data is duplicated for safety (replication)
 - Smart routing finds your data quickly
+
+
 
 ## One Honest Warning
 
