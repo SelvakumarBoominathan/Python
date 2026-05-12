@@ -1,0 +1,60 @@
+To master PostgreSQL, you must distinguish between how you write the code (Lexical Order) and how the database executes it (Logical Order).
+
+When you run a query, PostgreSQL doesn't start at the top and work its way down. It follows a specific "Control Flow" to narrow down the data before presenting it to you.
+
+The Logical Order of Execution
+This is the order in which PostgreSQL processes your query:
+
+FROM / JOIN: The database first identifies which tables it needs to pull data from and how they are joined together.
+
+WHERE: It filters individual rows based on your criteria. This happens before any grouping or aggregation.
+
+GROUP BY: It collapses rows into groups based on shared values in specified columns.
+
+HAVING: It filters the groups created in the previous step (e.g., "only show groups where the average price is > 100").
+
+SELECT: Only now does the database look at which columns you actually want to see. This includes calculating aliases and window functions.
+
+DISTINCT: It removes duplicate rows from the final result set.
+
+ORDER BY: It sorts the remaining data. This is expensive, so it happens near the end.
+
+LIMIT / OFFSET: Finally, it "clips" the result set to the requested number of rows.
+
+Why "Mastering" this order matters
+Understanding this flow prevents common "Junior Developer" errors. Here are three key insights:
+
+1. Why you can't use an Alias in a WHERE clause
+If you write SELECT price * 1.1 AS total_price FROM joints WHERE total_price > 100, PostgreSQL will throw an error.
+
+Reason: The WHERE clause (Step 2) is processed long before the SELECT clause (Step 5) defines what total_price is.
+
+2. WHERE vs. HAVING
+Use WHERE to filter raw data (more efficient, as it reduces data before grouping).
+
+Use HAVING to filter based on aggregate functions like SUM() or COUNT().
+
+3. Performance Optimization
+Since FROM and WHERE happen first, the more data you can filter out in these steps, the faster your query will run. Sorting (ORDER BY) is very resource-heavy; by the time the database gets to Step 7, you want the result set to be as small as possible.
+
+
+
+Written Order (Syntax),
+1. SELECT
+2. FROM
+3. WHERE
+4. GROUP BY
+5. HAVING
+6. ORDER BY
+7. LIMIT
+
+
+Logical Order (Execution)
+1. FROM / JOIN
+2. WHERE
+3. GROUP BY
+4. HAVING
+5. SELECT
+6. DISTINCT
+7. ORDER BY
+8. LIMIT
