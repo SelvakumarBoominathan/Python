@@ -1,3 +1,5 @@
+Linked in post
+
 To master PostgreSQL, you must distinguish between how you write the code (Lexical Order) and how the database executes it (Logical Order).
 
 When you run a query, PostgreSQL doesn't start at the top and work its way down. It follows a specific "Control Flow" to narrow down the data before presenting it to you.
