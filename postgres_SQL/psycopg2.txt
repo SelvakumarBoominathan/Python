@@ -1,2 +1,22 @@
 Psycopg2 is essentially the indispensable bridge that connects python and SQL.
 PostgreSQL adapter for the Python programming language.
+
+What Psycopg2 is for?
+Python speaks in objects, lists, and dictionaries, while PostgreSQL speaks in rows, columns, and SQL queries. Psycopg2 sits in the middle, allowing you to send commands to your database and get data back in a format Python understands.
+
+Uses:
+Improved Performance - Connection pooling enables single connection for all open queries which improves the performance of DB.
+
+Improved Security - It is thread safe. at a level of connections.  
+
+Improved Security - One of the biggest security risks in data programming is SQL injection. Psycopg2 completely neutralizes this by separating the SQL command from the data variables. 
+
+
+EG: instead of 'F' string use normal string
+
+    Never do this: cursor.execute(f"SELECT * FROM users WHERE id = {user_id}") (Vulnerable to hacking)
+
+    Always do this: cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,)) (Safe and escaped automatically by Psycopg2)
+
+
+Server-Side Cursors -  using 'fetchmany' it tells PostgreSQL to hold the data on the server side and lets Python fetch it in manageable chunks.
