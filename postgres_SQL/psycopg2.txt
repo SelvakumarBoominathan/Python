@@ -19,4 +19,15 @@ EG: instead of 'F' string use normal string
     Always do this: cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,)) (Safe and escaped automatically by Psycopg2)
 
 
-Server-Side Cursors -  using 'fetchmany' it tells PostgreSQL to hold the data on the server side and lets Python fetch it in manageable chunks.
+Server-Side Cursors -  using 'fetchmany' it tells PostgreSQL to hold the data on the server side and lets Python fetch it in manageable chunks. This will avoid fetching all 50 Million data rows from the database into the RAM and avoid Crashing. 
+
+Fast Bulk Operations - Data engineering requires moving massive amounts of data quickly. Psycopg2 provides optimized methods for bulk operations that bypass standard, slow INSERT loops:
+    execute_values(): Fast-tracks the insertion of a list of tuples.
+    copy_from() and copy_to(): Uses PostgreSQL's native COPY command, which is the absolete fastest way to move data from CSV/File directly into table. 
+
+
+Asynchronous Support - Psycopg2 supports asynchronous execution. It allows python to send time consuming query and untether itself to do other activities like data processing , API request ect. 
+
+
+
+
