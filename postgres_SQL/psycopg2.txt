@@ -1,0 +1,2 @@
+Psycopg2 is essentially the indispensable bridge that connects python and SQL.
+PostgreSQL adapter for the Python programming language.
