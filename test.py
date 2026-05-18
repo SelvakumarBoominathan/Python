@@ -1,3 +1,5 @@
+# Test file to read data from excel sheet using openpyxl library
+
 import openpyxl
 
 work_book = openpyxl.load_workbook(
@@ -6,7 +8,6 @@ work_book = openpyxl.load_workbook(
 sheet_obj = work_book['Answers']
 
 print(sheet_obj['B2'].value)
-
 
 
 # initial Setup
